@@ -1,39 +1,29 @@
-import broadway from "../assets/images/ny/broadway.jpg";
-import hotdog from "../assets/images/ny/hotdog.jpg";
-import iloveny from "../assets/images/ny/iloveny.jpg";
-import police from "../assets/images/ny/police.jpg";
 import styled from "styled-components";
 import { vFlex } from "../shared-styles/vFlex";
+import { allGames } from "../data/allGames";
 
 export function Find() {
+  const findImages = allGames.map((e) => {
+    let result: any;
+    if (e.gameIsActive) {
+      result = e.items.map((e, i) => {
+        return (
+          <StyledFindImageContainer>
+            <StyledFindImage key={i} src={e.image} alt="asdf" />
+            {e.text}
+          </StyledFindImageContainer>
+        );
+      });
+    }
+    return result;
+  });
+
   return (
     <>
-      <StyledFindContainer>
-        <StyledFindImageContainer
-        >
-          <StyledFindImage src={broadway} />
-          broadway
-        </StyledFindImageContainer>
-        <StyledFindImageContainer
-        >
-          <StyledFindImage src={hotdog} />
-          hotdog
-        </StyledFindImageContainer>
-        <StyledFindImageContainer
-        >
-          <StyledFindImage src={iloveny} />
-          iloveny
-        </StyledFindImageContainer>
-        <StyledFindImageContainer
-        >
-          <StyledFindImage src={police} />
-          police
-        </StyledFindImageContainer>
-      </StyledFindContainer>
+      <StyledFindContainer>{findImages}</StyledFindContainer>
     </>
   );
 }
-
 
 export const StyledFindContainer = styled.div`
   padding: 1rem 0;

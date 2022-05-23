@@ -2,8 +2,11 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { LeaderboardDropdown } from "./LeaderboardDropdown";
 import { Find } from "./Find";
+import { allGames } from "../data/allGames";
+import { propsInterface } from "../interfaces/propsInterface";
 
-export function Header() {
+export function Header(props: propsInterface) {
+  const { gameIsActive } = props;
   return (
     <StyledStickyContainer>
       <StyledHeaderContainer>
@@ -12,7 +15,11 @@ export function Header() {
         </StyledHeaderTextContainer>
         <LeaderboardDropdown />
       </StyledHeaderContainer>
-      <Find />
+      {allGames.map((e) => {
+        if (e.gameIsActive === true) {
+          return <Find />;
+        }
+      })}
     </StyledStickyContainer>
   );
 }
@@ -20,7 +27,7 @@ export function Header() {
 const StyledStickyContainer = styled.div`
   position: sticky;
   top: 0;
-`
+`;
 
 const StyledHeaderContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.main};
