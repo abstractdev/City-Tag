@@ -25,18 +25,18 @@ export function LeaderboardDropdown() {
 
   return (
     <>
-      <LeaderboardLinkContainer>
-        <LeaderboardLink
+      <StyledLeaderboardLinkContainer>
+        <StyledLeaderboardLink
           href="#"
           onClick={(event) => handleSetDropdownIsOpen(event)}
         >
           Leaderboard
-        </LeaderboardLink>
-        <IconContainer onClick={(event) => handleSetDropdownIsOpen(event)}>
+        </StyledLeaderboardLink>
+        <StyledIconContainer onClick={(event) => handleSetDropdownIsOpen(event)}>
           <Icon icon="bi:caret-down-fill" />
-        </IconContainer>
+        </StyledIconContainer>
         {dropdownIsOpen && (
-          <LeaderboardDropdownContainer>
+          <StyledLeaderboardDropdownContainer>
             <ul>
               <StyledLink
                 to="newyorkleaderboard"
@@ -63,20 +63,20 @@ export function LeaderboardDropdown() {
                 <StyledLi>Paris</StyledLi>
               </StyledLink>
             </ul>
-          </LeaderboardDropdownContainer>
+          </StyledLeaderboardDropdownContainer>
         )}
-      </LeaderboardLinkContainer>
+      </StyledLeaderboardLinkContainer>
     </>
   );
 }
 
-const LeaderboardLinkContainer = styled.div`
+const StyledLeaderboardLinkContainer = styled.div`
   display: flex;
   align-items: center;
   position: relative;
 `;
 
-const LeaderboardLink = styled.a`
+const StyledLeaderboardLink = styled.a`
   font-size: 2rem;
   text-decoration: none;
   font-family: "sky";
@@ -87,12 +87,12 @@ const LeaderboardLink = styled.a`
   }
 `;
 
-const IconContainer = styled.div`
+const StyledIconContainer = styled.div`
   color: ${({ theme }) => theme.colors.white};
   cursor: pointer;
 `;
 
-const LeaderboardDropdownContainer = styled.div`
+const StyledLeaderboardDropdownContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;

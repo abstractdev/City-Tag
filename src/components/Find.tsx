@@ -8,34 +8,34 @@ import { vFlex } from "../shared-styles/vFlex";
 export function Find() {
   return (
     <>
-      <FindContainer>
-        <FindImageContainer
+      <StyledFindContainer>
+        <StyledFindImageContainer
         >
-          <FindImage src={broadway} />
+          <StyledFindImage src={broadway} />
           broadway
-        </FindImageContainer>
-        <FindImageContainer
+        </StyledFindImageContainer>
+        <StyledFindImageContainer
         >
-          <FindImage src={hotdog} />
+          <StyledFindImage src={hotdog} />
           hotdog
-        </FindImageContainer>
-        <FindImageContainer
+        </StyledFindImageContainer>
+        <StyledFindImageContainer
         >
-          <FindImage src={iloveny} />
+          <StyledFindImage src={iloveny} />
           iloveny
-        </FindImageContainer>
-        <FindImageContainer
+        </StyledFindImageContainer>
+        <StyledFindImageContainer
         >
-          <FindImage src={police} />
+          <StyledFindImage src={police} />
           police
-        </FindImageContainer>
-      </FindContainer>
+        </StyledFindImageContainer>
+      </StyledFindContainer>
     </>
   );
 }
 
 
-export const FindContainer = styled.div`
+export const StyledFindContainer = styled.div`
   padding: 1rem 0;
   display: flex;
   justify-content: center;
@@ -47,7 +47,7 @@ export const FindContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.main};
 `;
 
-export const FindImageContainer = styled(vFlex)`
+export const StyledFindImageContainer = styled(vFlex)`
   height: 100px;
   width: 200px;
   gap: 0.3rem;
@@ -57,7 +57,7 @@ export const FindImageContainer = styled(vFlex)`
   }
 `;
 
-export const FindImage = styled.img`
+export const StyledFindImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: contain;
