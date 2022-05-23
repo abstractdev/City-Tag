@@ -1,4 +1,5 @@
 const rioGame = {
+  name: "rio",
   gameImage: require("../assets/images/rio/rio.jpg"),
   gameIsActive: false,
   items: [

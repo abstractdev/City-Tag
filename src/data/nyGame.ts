@@ -1,4 +1,5 @@
 const nyGame = {
+  name: "ny",
   gameImage: require("../assets/images/ny/ny.jpg"),
   gameIsActive: true,
   items: [

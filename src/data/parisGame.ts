@@ -1,4 +1,5 @@
 const parisGame = {
+  name: "paris",
   gameImage: require("../assets/images/paris/paris.jpg"),
   gameIsActive: false,
   items: [
