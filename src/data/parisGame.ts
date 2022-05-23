@@ -1,31 +1,26 @@
-import brie from "../assets/images/paris/brie.jpg";
-import fleurdelis from "../assets/images/paris/fleurdelis.jpg";
-import monalisa from "../assets/images/paris/monalisa.jpg";
-import tophat from "../assets/images/paris/tophat.jpg";
-import parisImage from "../assets/images/paris/paris.jpg";
-
 const parisGame = {
-  gameImage: parisImage,
+  gameImage: require("../assets/images/paris/paris.jpg"),
+  gameIsActive: false,
   items: [
     {
       name: "brie",
       text: "Brie",
-      image: brie,
+      image: require("../assets/images/paris/brie.jpg"),
     },
     {
       name: "fleurdelis",
       text: "Fleur De Lis",
-      image: fleurdelis,
+      image: require("../assets/images/paris/fleurdelis.jpg"),
     },
     {
       name: "monalisa",
       text: "Mona Lisa",
-      image: monalisa,
+      image: require("../assets/images/paris/monalisa.jpg"),
     },
     {
       name: "tophat",
       text: "Tophat",
-      image: tophat,
+      image: require("../assets/images/paris/tophat.jpg"),
     },
   ],
 };

@@ -1,31 +1,26 @@
-import broadway from "../assets/images/ny/broadway.jpg";
-import hotdog from "../assets/images/ny/hotdog.jpg";
-import iloveny from "../assets/images/ny/iloveny.jpg";
-import police from "../assets/images/ny/police.jpg";
-import nyImage from "../assets/images/ny/ny.jpg";
-
 const nyGame = {
-  gameImage: nyImage,
+  gameImage: require("../assets/images/ny/ny.jpg"),
+  gameIsActive: true,
   items: [
     {
       name: "broadway",
       text: "Broadway Sign",
-      image: broadway,
+      image: require("../assets/images/ny/broadway.jpg"),
     },
     {
       name: "hotdog",
       text: "Hot Dog Vendor",
-      image: hotdog,
+      image: require("../assets/images/ny/hotdog.jpg"),
     },
     {
       name: "iloveny",
       text: "I Love NY",
-      image: iloveny,
+      image: require("../assets/images/ny/iloveny.jpg"),
     },
     {
       name: "police",
       text: "NYPD Officer",
-      image: police,
+      image: require("../assets/images/ny/police.jpg"),
     },
   ],
 };

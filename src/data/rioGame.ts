@@ -1,31 +1,26 @@
-import dancer from "../assets/images/rio/dancer.jpg"
-import flag from "../assets/images/rio/flag.jpg"
-import tambourine from "../assets/images/rio/tambourine.jpg"
-import soccer from "../assets/images/rio/soccer.jpg"
-import rioImage from "../assets/images/rio/rio.jpg"
-
 const rioGame = {
-  gameImage: rioImage,
+  gameImage: require("../assets/images/rio/rio.jpg"),
+  gameIsActive: false,
   items: [
     {
       name: "dancer",
       text: "Dancer",
-      image: dancer,
+      image: require("../assets/images/rio/dancer.jpg"),
     },
     {
       name: "flag",
       text: "Flag",
-      image: flag,
+      image: require("../assets/images/rio/flag.jpg"),
     },
     {
       name: "tambourine",
       text: "Tambourine",
-      image: tambourine,
+      image: require("../assets/images/rio/tambourine.jpg"),
     },
     {
       name: "soccer",
       text: "Soccer ball",
-      image: soccer,
+      image: require("../assets/images/rio/soccer.jpg"),
     },
   ],
 };
