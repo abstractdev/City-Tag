@@ -2,24 +2,23 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { LeaderboardDropdown } from "./LeaderboardDropdown";
 import { Find } from "./Find";
-import { allGames } from "../data/allGames";
 import { propsInterface } from "../interfaces/propsInterface";
+import { useNavigate } from "react-router-dom";
 
 export function Header(props: propsInterface) {
-  const { gameIsActive } = props;
+  const navigate = useNavigate();
+  const { currentGame } = props;
   return (
     <StyledStickyContainer>
       <StyledHeaderContainer>
         <StyledHeaderTextContainer>
-          <StyledHeaderText to="/city-tag">CITY TAG</StyledHeaderText>
+          <StyledHeaderText to="/city-tag" onClick={() => navigate(0)}>
+            CITY TAG
+          </StyledHeaderText>
         </StyledHeaderTextContainer>
         <LeaderboardDropdown />
       </StyledHeaderContainer>
-      {allGames.map((e) => {
-        if (e.gameIsActive === true) {
-          return <Find />;
-        }
-      })}
+      {currentGame && <Find currentGame={currentGame} />}
     </StyledStickyContainer>
   );
 }
