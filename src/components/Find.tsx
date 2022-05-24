@@ -1,15 +1,17 @@
 import styled from "styled-components";
-import { vFlex } from "../shared-styles/vFlex";
+import { vFlex } from "../shared-styles/vFlex.styles";
 import { allGames } from "../data/allGames";
+import { propsInterface } from "../interfaces/propsInterface";
 
-export function Find() {
+export function Find(props: propsInterface) {
+  const { currentGame } = props;
   const findImages = allGames.map((e) => {
     let result: any;
-    if (e.gameIsActive) {
+    if (currentGame && e.name === currentGame.name) {
       result = e.items.map((e, i) => {
         return (
           <StyledFindImageContainer>
-            <StyledFindImage key={i} src={e.image} alt="asdf" />
+            <StyledFindImage key={i} src={e.image} alt="find image" />
             {e.text}
           </StyledFindImageContainer>
         );
