@@ -1,24 +1,34 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { propsInterface } from "../interfaces/propsInterface";
 import { stylesInterface } from "../interfaces/stylesInterface";
 import { vFlex } from "../shared-styles/vFlex.styles";
 import { getGameItemTextArr } from "../helpers/getGameData";
 import { getClickPosition } from "../helpers/getClickPosition";
+import { checkFirebaseForMatch } from "../helpers/checkFirebaseForMatch";
 
 export function Game(props: propsInterface) {
   const { currentGame } = props;
+  const coordsCollection = `${currentGame!.name}Coords`
   const gameItemTextArr = getGameItemTextArr(currentGame);
   const [boardIsClicked, setBoardIsClicked] = useState(false);
   const [targetPosition, setTargetPosition] = useState<number[]>([]);
   const [dropdownPosition, setDropdownPosition] = useState<number[]>([]);
+  const [itemClickPosition, setItemClickPosition] = useState<number[]>([]);
 
-  function handleTargetPosition(event: any) {
-    const { xItemClickPos, yItemClickPos, xTargetClickPos, yTargetClickPos } =
-      getClickPosition(event);
+  
+  function handleTargetAndItemPosition(event: React.MouseEvent) {
+    const { xItemClickPos, yItemClickPos, xTargetClickPos, yTargetClickPos } = getClickPosition(event);
     setBoardIsClicked(!boardIsClicked);
+    setItemClickPosition([xItemClickPos, yItemClickPos])
     setTargetPosition([xTargetClickPos - 23, yTargetClickPos - 23]);
     setDropdownPosition([xTargetClickPos + 20, yTargetClickPos + 20]);
+  }
+  async function handleDropdownClick (event: React.MouseEvent<HTMLLIElement>) {
+    if (event !== null && event.target instanceof HTMLElement) {
+      await checkFirebaseForMatch(coordsCollection, itemClickPosition[0], itemClickPosition[1], event.target.dataset.id);
+      console.log('qwerty')
+    }
   }
 
   return (
@@ -26,7 +36,7 @@ export function Game(props: propsInterface) {
       <StyledCityImage
         src={currentGame!.gameImage}
         alt={"city image"}
-        onClick={(event) => handleTargetPosition(event)}
+        onClick={(event) => handleTargetAndItemPosition(event)}
       />
       {boardIsClicked && (
         <>
@@ -37,7 +47,7 @@ export function Game(props: propsInterface) {
           >
             <ul>
               {gameItemTextArr?.map((e, i) => (
-                <DropdownLi key={`${e}${i}`}>{e}</DropdownLi>
+                <DropdownLi key={`${e.name}${i}`} data-id={e.name} onClick={(event) => handleDropdownClick(event)}>{e.text}</DropdownLi>
               ))}
             </ul>
           </DropdownContainer>
