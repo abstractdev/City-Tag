@@ -3,20 +3,14 @@ import styled from "styled-components";
 import { propsInterface } from "../interfaces/propsInterface";
 import { stylesInterface } from "../interfaces/stylesInterface";
 import { useParams } from "react-router-dom";
-import { allGames } from "../data/allGames";
+import { getFilteredCityProperties } from "../helpers/getGameData";
 
 export function Leaderboard(props: propsInterface) {
-  const { city } = useParams();
+  const { cityParam } = useParams();
   const { userData } = props;
-  const filteredCityUsers = userData!.filter((e: any) => e.city === city);
-
-  //compare filtered firebase users with existing city object to find name and color
-  const filteredCityObject = allGames.find(
-    (e: any) => e.name === filteredCityUsers[0].city
-  );
-  const filteredCityName = filteredCityObject?.displayName;
-  const filteredCityColor = filteredCityObject?.color;
-  const filteredCityFont = filteredCityObject?.name;
+  const filteredCityUsers = userData!.filter((e: any) => e.city === cityParam);
+  const { filteredCityName, filteredCityColor, filteredCityFont } =
+    getFilteredCityProperties(filteredCityUsers[0].city);
 
   const sortedUserData = filteredCityUsers!.sort((a: any, b: any) => {
     return a.time! - b.time!;
