@@ -4,7 +4,12 @@ export function getGameItemTextArr(currentGame: any) {
   const game = allGames.find((e) => {
     return e.name === currentGame.name;
   });
-  return game?.items.map((e) => e.text);
+  return game?.items.map((e) => {
+    return {
+      name: e.name,
+      text: e.text,
+    };
+  });
 }
 
 //compare filtered firebase users with existing city object to find name and color
