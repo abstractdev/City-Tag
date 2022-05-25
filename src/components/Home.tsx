@@ -1,16 +1,17 @@
 import styled from "styled-components";
-import { allGames } from "../data/allGames";
 import { propsInterface } from "../interfaces/propsInterface";
 import { vFlex } from "../shared-styles/vFlex.styles";
 import { Link } from "react-router-dom";
+import { getAllGameImages } from "../helpers/getGameData";
 
 export function Home(props: propsInterface) {
   const { currentGame, handleCurrentGame } = props;
+  const allGameImages = getAllGameImages();
   return (
     <StyledHomeContainer onClick={handleCurrentGame}>
       <StyledHomeText>Choose a city</StyledHomeText>
       <StyledHomeContent>
-        {allGames.map((e, i) => {
+        {allGameImages.map((e, i) => {
           return (
             <Link to={`/game/${e.name}`} key={i}>
               <StyledHomeImageContainer
