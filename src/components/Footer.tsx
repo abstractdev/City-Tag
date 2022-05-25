@@ -6,19 +6,35 @@ export function Footer() {
     <>
       <StyledFooterContainer>
         <StyledDiv>
-          <StyledLink target="_blank" rel="noreferrer noopener" href="https://github.com/abstractdev">
-            <AiOutlineBehanceSquare />
+          <StyledLink
+            target="_blank"
+            rel="noreferrer noopener"
+            href="https://github.com/abstractdev"
+          >
+            <StyledBehanceLogo />
           </StyledLink>
-          <StyledLink target="_blank" rel="noreferrer noopener"  href="http://www.behance.net/gusmorais">
+          <StyledLink
+            target="_blank"
+            rel="noreferrer noopener"
+            href="http://www.behance.net/gusmorais"
+          >
             {" "}
-            All images by Gus Morais
+            Images by Gus Morais
           </StyledLink>
         </StyledDiv>
         <StyledDiv>
-          <StyledLink target="_blank" rel="noreferrer noopener" href="https://github.com/abstractdev">
-            <AiOutlineGithub />
+          <StyledLink
+            target="_blank"
+            rel="noreferrer noopener"
+            href="https://github.com/abstractdev"
+          >
+            <StyledGithubLogo />
           </StyledLink>
-          <StyledLink target="_blank" rel="noreferrer noopener" href="https://github.com/abstractdev">
+          <StyledLink
+            target="_blank"
+            rel="noreferrer noopener"
+            href="https://github.com/abstractdev"
+          >
             {" "}
             Site by abstractdev
           </StyledLink>
@@ -33,9 +49,10 @@ const StyledFooterContainer = styled.div`
   left: 0;
   bottom: 0;
   display: flex;
+  width: 100%;
   justify-content: center;
   align-content: center;
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.main};
   padding: 0.5rem 0.75rem;
   font-size: 70%;
   @media screen and (max-width: 644px) {
@@ -46,7 +63,7 @@ const StyledFooterContainer = styled.div`
 
 const StyledLink = styled.a`
   text-decoration: none;
-  color: ${({ theme }) => theme.colors.main};
+  color: ${({ theme }) => theme.colors.white};
 `;
 
 const StyledDiv = styled.div`
@@ -54,4 +71,15 @@ const StyledDiv = styled.div`
   justify-content: center;
   align-items: center;
   gap: 0.08rem;
+`;
+
+const StyledGithubLogo = styled(AiOutlineGithub)`
+  @media screen and (max-width: 644px) {
+    display: none;
+  }
+`;
+const StyledBehanceLogo = styled(AiOutlineBehanceSquare)`
+  @media screen and (max-width: 644px) {
+    display: none;
+  }
 `;
