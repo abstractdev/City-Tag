@@ -3,16 +3,14 @@ import { Link } from "react-router-dom";
 import { LeaderboardDropdown } from "./LeaderboardDropdown";
 import { Find } from "./Find";
 import { propsInterface } from "../interfaces/propsInterface";
-import { useNavigate } from "react-router-dom";
 
 export function Header(props: propsInterface) {
-  const navigate = useNavigate();
-  const { currentGame } = props;
+  const { currentGame, setCurrentGame } = props;
   return (
     <StyledStickyContainer>
       <StyledHeaderContainer>
         <StyledHeaderTextContainer>
-          <StyledHeaderText to="/city-tag" onClick={() => navigate(0)}>
+          <StyledHeaderText to="/" onClick={() => setCurrentGame!(null)}>
             CITY TAG
           </StyledHeaderText>
         </StyledHeaderTextContainer>

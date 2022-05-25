@@ -10,6 +10,7 @@ import { Route, Routes } from "react-router-dom";
 import { useGetUserData } from "./custom-hooks/useGetUserData";
 import { propsInterface } from "./interfaces/propsInterface";
 import { Leaderboard } from "./components/Leaderboard";
+import { Game } from "./components/Game";
 
 function App() {
   const { userData } = useGetUserData();
@@ -33,6 +34,15 @@ function App() {
           path="/"
           element={
             <Home
+              currentGame={currentGame}
+              handleCurrentGame={handleCurrentGame}
+            />
+          }
+        />
+        <Route
+          path="/game/:city"
+          element={
+            <Game
               currentGame={currentGame}
               handleCurrentGame={handleCurrentGame}
             />

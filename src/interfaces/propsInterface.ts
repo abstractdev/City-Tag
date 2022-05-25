@@ -1,67 +1,63 @@
 export interface propsInterface {
   name?: string;
   gameIsActive?: boolean;
-  currentGame?:
-    | {
+  currentGame?: {
+    name: string;
+    displayName: string;
+    gameImage: any;
+    gameIsActive: boolean;
+    items: [
+      {
         name: string;
-        displayName: string;
-        gameImage: any;
-        gameIsActive: boolean;
-        items: [
-          {
-            name: string;
-            text: string;
-            image: any;
-          },
-          {
-            name: string;
-            text: string;
-            image: any;
-          },
-          {
-            name: string;
-            text: string;
-            image: any;
-          },
-          {
-            name: string;
-            text: string;
-            image: any;
-          }
-        ];
+        text: string;
+        image: any;
+      },
+      {
+        name: string;
+        text: string;
+        image: any;
+      },
+      {
+        name: string;
+        text: string;
+        image: any;
+      },
+      {
+        name: string;
+        text: string;
+        image: any;
       }
-    | undefined;
+    ];
+  } | null;
   setCurrentGame?: (
-    currentGame:
-      | {
+    currentGame: {
+      name: string;
+      displayName: string;
+      gameImage: any;
+      gameIsActive: boolean;
+      items: [
+        {
           name: string;
-          displayName: string;
-          gameImage: any;
-          gameIsActive: boolean;
-          items: [
-            {
-              name: string;
-              text: string;
-              image: any;
-            },
-            {
-              name: string;
-              text: string;
-              image: any;
-            },
-            {
-              name: string;
-              text: string;
-              image: any;
-            },
-            {
-              name: string;
-              text: string;
-              image: any;
-            }
-          ];
+          text: string;
+          image: any;
+        },
+        {
+          name: string;
+          text: string;
+          image: any;
+        },
+        {
+          name: string;
+          text: string;
+          image: any;
+        },
+        {
+          name: string;
+          text: string;
+          image: any;
         }
-      | undefined
+      ];
+    } | null
   ) => void;
 
   handleCurrentGame?: (event: any) => void;
