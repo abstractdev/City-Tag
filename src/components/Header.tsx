@@ -10,7 +10,7 @@ export function Header(props: propsInterface) {
     <StyledStickyContainer>
       <StyledHeaderContainer>
         <StyledHeaderTextContainer>
-          <StyledHeaderText to="/" onClick={() => setCurrentGame!(null)}>
+          <StyledHeaderText to="/">
             CITY TAG
           </StyledHeaderText>
         </StyledHeaderTextContainer>
