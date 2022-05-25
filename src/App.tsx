@@ -6,7 +6,7 @@ import { theme } from "./shared-styles/theme";
 import { Footer } from "./components/Footer";
 import { allGames } from "./data/allGames";
 import { Home } from "./components/Home";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { useGetUserData } from "./custom-hooks/useGetUserData";
 import { propsInterface } from "./interfaces/propsInterface";
 import { Leaderboard } from "./components/Leaderboard";
@@ -15,7 +15,14 @@ import { Game } from "./components/Game";
 function App() {
   const { userData } = useGetUserData();
   const [gameIsActive, setGameIsActive] = useState(false);
-  const [currentGame, setCurrentGame] = useState<any>();
+  const [currentGame, setCurrentGame] = useState<any>(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      setCurrentGame(null);
+    }
+  }, [location]);
 
   function handleCurrentGame(event: any) {
     allGames.forEach((e) => {
@@ -40,7 +47,7 @@ function App() {
           }
         />
         <Route
-          path="/game/:city"
+          path="/game/:cityParam"
           element={
             <Game
               currentGame={currentGame}
@@ -49,7 +56,7 @@ function App() {
           }
         />
         <Route
-          path="/leaderboard/:city"
+          path="/leaderboard/:cityParam"
           element={<Leaderboard userData={userData} />}
         />
       </Routes>
