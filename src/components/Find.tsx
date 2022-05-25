@@ -10,7 +10,7 @@ export function Find(props: propsInterface) {
     if (currentGame && e.name === currentGame.name) {
       result = e.items.map((e, i) => {
         return (
-          <StyledFindImageContainer>
+          <StyledFindImageContainer key={i}>
             <StyledFindImage key={i} src={e.image} alt="find image" />
             {e.text}
           </StyledFindImageContainer>
@@ -27,7 +27,7 @@ export function Find(props: propsInterface) {
   );
 }
 
-export const StyledFindContainer = styled.div`
+const StyledFindContainer = styled.div`
   padding: 1rem 0;
   display: flex;
   justify-content: center;
@@ -39,7 +39,7 @@ export const StyledFindContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.main};
 `;
 
-export const StyledFindImageContainer = styled(vFlex)`
+const StyledFindImageContainer = styled(vFlex)`
   height: 100px;
   width: 200px;
   gap: 0.3rem;
@@ -49,7 +49,7 @@ export const StyledFindImageContainer = styled(vFlex)`
   }
 `;
 
-export const StyledFindImage = styled.img`
+const StyledFindImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: contain;
