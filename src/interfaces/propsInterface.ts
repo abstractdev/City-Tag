@@ -4,6 +4,7 @@ export interface propsInterface {
   currentGame?:
     | {
         name: string;
+        displayName: string;
         gameImage: any;
         gameIsActive: boolean;
         items: [
@@ -34,6 +35,7 @@ export interface propsInterface {
     currentGame:
       | {
           name: string;
+          displayName: string;
           gameImage: any;
           gameIsActive: boolean;
           items: [
@@ -63,28 +65,14 @@ export interface propsInterface {
   ) => void;
 
   handleCurrentGame?: (event: any) => void;
-
-  userData?:
-    | [
-        {
-          id: string;
-          name: string;
-          displayTime: string;
-          time: number;
-        }
-      ]
-    | [{}];
-
-  setUserData?: (
-    userData:
-      | [
-          {
-            id: string;
-            name: string;
-            displayTime: string;
-            time: number;
-          }
-        ]
-      | [{}]
-  ) => void;
+  userData?: any[];
+  setUserData?: (userData: any[]) => void;
+  nyLeaderboardIsClicked?: boolean;
+  rioLeaderboardIsClicked?: boolean;
+  tokyoLeaderboardIsClicked?: boolean;
+  parisLeaderboardIsClicked?: boolean;
+  setNyLeaderboardIsClicked?: (nyLeaderboardIsClicked: boolean) => void;
+  setRioLeaderboardIsClicked?: (rioLeaderboardIsClicked: boolean) => void;
+  setTokyoLeaderboardIsClicked?: (tokyoLeaderboardIsClicked: boolean) => void;
+  setParisLeaderboardIsClicked?: (parisLeaderboardIsClicked: boolean) => void;
 }
