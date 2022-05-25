@@ -14,7 +14,7 @@ export function LeaderboardDropdown() {
     clickOutside(dropdownIsOpen, setDropdownIsOpen, containerRef, navigate);
   }, [dropdownIsOpen]);
 
-  function handleSetDropdownIsOpen(event: any) {
+  function handleSetDropdownIsOpen(event: React.MouseEvent) {
     setDropdownIsOpen((prev) => !prev);
   }
 

@@ -22,6 +22,7 @@ export function Header(props: propsInterface) {
 }
 
 const StyledStickyContainer = styled.div`
+  z-index: 1;
   position: sticky;
   top: 0;
 `;

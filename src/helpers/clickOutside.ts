@@ -4,7 +4,7 @@ export function clickOutside(
   contentRef: any,
   navigate: (delta: number) => void
 ) {
-  const handleClickOutside = (event: any) => {
+  const handleClickOutside = (event: MouseEvent) => {
     if (
       contentState &&
       contentRef.current &&
@@ -17,8 +17,8 @@ export function clickOutside(
       }, 200);
     }
   };
-  document.addEventListener("click", handleClickOutside);
+  document.addEventListener("click", (event) => handleClickOutside(event));
   return () => {
-    document.removeEventListener("click", handleClickOutside);
+    document.removeEventListener("click", (event) => handleClickOutside(event));
   };
 }

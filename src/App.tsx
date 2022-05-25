@@ -24,11 +24,13 @@ function App() {
     }
   }, [location]);
 
-  function handleCurrentGame(event: any) {
+  function handleCurrentGame(event: React.MouseEvent<HTMLDivElement>) {
     allGames.forEach((e) => {
-      if (e.name === event.target.dataset.id) {
-        setCurrentGame(e);
-        e.gameIsActive = true;
+      if (event !== null && event.target instanceof HTMLElement) {
+        if (e.name === event.target.dataset.id) {
+          setCurrentGame(e);
+          e.gameIsActive = true;
+        }
       }
     });
   }

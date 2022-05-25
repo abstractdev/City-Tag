@@ -62,7 +62,7 @@ export interface propsInterface {
     } | null
   ) => void;
 
-  handleCurrentGame?: (event: any) => void;
+  handleCurrentGame?: (event: React.MouseEvent<HTMLDivElement>) => void;
   userData?: any[];
   setUserData?: (userData: any[]) => void;
   nyLeaderboardIsClicked?: boolean;
