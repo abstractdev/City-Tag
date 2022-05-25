@@ -4,6 +4,7 @@ export interface propsInterface {
   currentGame?: {
     name: string;
     displayName: string;
+    color: string;
     gameImage: any;
     gameIsActive: boolean;
     items: [
@@ -33,6 +34,7 @@ export interface propsInterface {
     currentGame: {
       name: string;
       displayName: string;
+      color: string;
       gameImage: any;
       gameIsActive: boolean;
       items: [
