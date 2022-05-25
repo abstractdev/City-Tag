@@ -1,0 +1,89 @@
+import { trimData } from "../helpers/trimData";
+import styled from "styled-components";
+import { propsInterface } from "../interfaces/propsInterface";
+import { stylesInterface } from "../interfaces/stylesInterface";
+import { useParams } from "react-router-dom";
+import { allGames } from "../data/allGames";
+
+export function Leaderboard(props: propsInterface) {
+  const { city } = useParams();
+  const { userData } = props;
+  const filteredCityUsers = userData!.filter((e: any) => e.city === city);
+
+  //compare filtered firebase users with existing city object to find name and color
+  const filteredCityObject = allGames.find(
+    (e: any) => e.name === filteredCityUsers[0].city
+  );
+  const filteredCityName = filteredCityObject?.displayName;
+  const filteredCityColor = filteredCityObject?.color;
+  const filteredCityFont = filteredCityObject?.name;
+
+  const sortedUserData = filteredCityUsers!.sort((a: any, b: any) => {
+    return a.time! - b.time!;
+  });
+  const userItems = sortedUserData.map((e: any, i: number) => {
+    return (
+      <tr key={e.id}>
+        <StyledTd>{i + 1}</StyledTd>
+        <StyledTd>{e.name}</StyledTd>
+        <StyledTimeTd>{trimData(e.displayTime)}</StyledTimeTd>
+      </tr>
+    );
+  });
+  return (
+    <LeaderboardContainer filteredCityColor={filteredCityColor}>
+      <StyledH1 filteredCityFont={filteredCityFont}>
+        {filteredCityName}
+      </StyledH1>
+      <StyledTable>
+        <thead>
+          <StyledTr>
+            <StyledTd></StyledTd>
+            <StyledTdHeader>Name</StyledTdHeader>
+            <StyledTdHeader>Time</StyledTdHeader>
+          </StyledTr>
+        </thead>
+        <tbody>{userItems}</tbody>
+      </StyledTable>
+    </LeaderboardContainer>
+  );
+}
+
+export const StyledTable = styled.table`
+  width: 80%;
+  margin: 2rem auto 0 auto;
+  @media screen and (max-width: 670px) {
+    width: 100%;
+  }
+`;
+export const StyledTr = styled.tr`
+  border-bottom: 1px solid #121212;
+`;
+
+export const StyledTd = styled.td`
+  padding: 0.5rem;
+  max-width: 20ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+export const StyledTimeTd = styled(StyledTd)`
+  width: 20%;
+  @media screen and (max-width: 670px) {
+    width: 34%;
+  }
+`;
+export const StyledTdHeader = styled(StyledTd)`
+  font-weight: 900;
+`;
+
+export const LeaderboardContainer = styled.div<stylesInterface>`
+  background-color: ${(props) => props.filteredCityColor};
+  height: 100vh;
+  padding-top: 2rem;
+`;
+export const StyledH1 = styled.h1<stylesInterface>`
+  font-size: 4rem;
+  text-align: center;
+  cursor: default;
+  font-family: ${(props) => props.filteredCityFont};
+`;

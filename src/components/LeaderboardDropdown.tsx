@@ -5,18 +5,13 @@ import { useState, useRef, useEffect } from "react";
 import { clickOutside } from "../helpers/clickOutside";
 
 export function LeaderboardDropdown() {
-  const containerRef = useRef<HTMLDivElement>();
+  const containerRef = useRef<any>();
   const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
   const navigate = () => {
     ("");
   };
   useEffect(() => {
-    clickOutside(
-      dropdownIsOpen,
-      setDropdownIsOpen,
-      containerRef,
-      navigate
-    );
+    clickOutside(dropdownIsOpen, setDropdownIsOpen, containerRef, navigate);
   }, [dropdownIsOpen]);
 
   function handleSetDropdownIsOpen(event: any) {
@@ -25,39 +20,41 @@ export function LeaderboardDropdown() {
 
   return (
     <>
-      <StyledLeaderboardLinkContainer>
+      <StyledLeaderboardLinkContainer ref={containerRef}>
         <StyledLeaderboardLink
           href="#"
           onClick={(event) => handleSetDropdownIsOpen(event)}
         >
           Leaderboard
         </StyledLeaderboardLink>
-        <StyledIconContainer onClick={(event) => handleSetDropdownIsOpen(event)}>
+        <StyledIconContainer
+          onClick={(event) => handleSetDropdownIsOpen(event)}
+        >
           <Icon icon="bi:caret-down-fill" />
         </StyledIconContainer>
         {dropdownIsOpen && (
           <StyledLeaderboardDropdownContainer>
             <ul>
               <StyledLink
-                to="newyorkleaderboard"
+                to="/leaderboard/ny"
                 onClick={() => setDropdownIsOpen(false)}
               >
                 <StyledLi>New York</StyledLi>
               </StyledLink>
               <StyledLink
-                to="rioleaderboard"
+                to="/leaderboard/rio"
                 onClick={() => setDropdownIsOpen(false)}
               >
                 <StyledLi>Rio De Janeiro</StyledLi>
               </StyledLink>
               <StyledLink
-                to="tokyoleaderboard"
+                to="/leaderboard/tokyo"
                 onClick={() => setDropdownIsOpen(false)}
               >
                 <StyledLi>Tokyo</StyledLi>
               </StyledLink>
               <StyledLink
-                to="parisleaderboard"
+                to="/leaderboard/paris"
                 onClick={() => setDropdownIsOpen(false)}
               >
                 <StyledLi>Paris</StyledLi>
