@@ -1,5 +1,7 @@
 const nyGame = {
   name: "ny",
+  displayName: "New York",
+  color: "#f2c205",
   gameImage: require("../assets/images/ny/ny.jpg"),
   gameIsActive: true,
   items: [

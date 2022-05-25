@@ -1,5 +1,7 @@
 const tokyoGame = {
   name: "tokyo",
+  displayName: "Tokyo",
+  color: "#d78ebf",
   gameImage: require("../assets/images/tokyo/tokyo.jpg"),
   gameIsActive: false,
   items: [

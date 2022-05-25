@@ -1,5 +1,7 @@
 const rioGame = {
   name: "rio",
+  displayName: "Rio",
+  color: "#00ad73",
   gameImage: require("../assets/images/rio/rio.jpg"),
   gameIsActive: false,
   items: [

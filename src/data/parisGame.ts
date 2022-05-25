@@ -1,5 +1,7 @@
 const parisGame = {
   name: "paris",
+  displayName: "Paris",
+  color: "#f94910",
   gameImage: require("../assets/images/paris/paris.jpg"),
   gameIsActive: false,
   items: [
