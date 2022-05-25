@@ -12,21 +12,25 @@ export interface propsInterface {
         name: string;
         text: string;
         image: any;
+        isFound: boolean;
       },
       {
         name: string;
         text: string;
         image: any;
+        isFound: boolean;
       },
       {
         name: string;
         text: string;
         image: any;
+        isFound: boolean;
       },
       {
         name: string;
         text: string;
         image: any;
+        isFound: boolean;
       }
     ];
   } | null;
@@ -42,21 +46,25 @@ export interface propsInterface {
           name: string;
           text: string;
           image: any;
+          isFound: boolean;
         },
         {
           name: string;
           text: string;
           image: any;
+          isFound: boolean;
         },
         {
           name: string;
           text: string;
           image: any;
+          isFound: boolean;
         },
         {
           name: string;
           text: string;
           image: any;
+          isFound: boolean;
         }
       ];
     } | null
