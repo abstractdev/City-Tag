@@ -12,10 +12,9 @@ export function Home(props: propsInterface) {
       <StyledHomeContent>
         {allGames.map((e, i) => {
           return (
-            <Link to={`/game/${e.name}`}>
+            <Link to={`/game/${e.name}`} key={i}>
               <StyledHomeImageContainer
                 data-id={e.name}
-                key={i}
                 style={{ backgroundImage: `url(${e.gameImage})` }}
               />
             </Link>

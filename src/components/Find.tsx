@@ -11,7 +11,7 @@ export function Find(props: propsInterface) {
       result = e.items.map((e, i) => {
         return (
           <StyledFindImageContainer key={i}>
-            <StyledFindImage key={i} src={e.image} alt="find image" />
+            <StyledFindImage src={e.image} alt="find image" />
             {e.text}
           </StyledFindImageContainer>
         );
