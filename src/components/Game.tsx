@@ -4,6 +4,7 @@ import { propsInterface } from "../interfaces/propsInterface";
 import { stylesInterface } from "../interfaces/stylesInterface";
 import { vFlex } from "../shared-styles/vFlex.styles";
 import { getGameItemTextArr } from "../helpers/getGameData";
+import { getClickPosition } from "../helpers/getClickPosition";
 
 export function Game(props: propsInterface) {
   const { currentGame } = props;
@@ -13,16 +14,9 @@ export function Game(props: propsInterface) {
   const [dropdownPosition, setDropdownPosition] = useState<number[]>([]);
 
   function handleTargetPosition(event: any) {
+    const { xItemClickPos, yItemClickPos, xTargetClickPos, yTargetClickPos } =
+      getClickPosition(event);
     setBoardIsClicked(!boardIsClicked);
-    const rect = event.target.getBoundingClientRect();
-    const xItemClickPos = Math.round(
-      (event.nativeEvent.offsetX / event.nativeEvent.target.offsetWidth) * 100
-    );
-    const yItemClickPos = Math.round(
-      (event.nativeEvent.offsetY / event.nativeEvent.target.offsetHeight) * 100
-    );
-    const xTargetClickPos = event.nativeEvent.clientX - rect.left;
-    const yTargetClickPos = event.nativeEvent.clientY - rect.top;
     setTargetPosition([xTargetClickPos - 23, yTargetClickPos - 23]);
     setDropdownPosition([xTargetClickPos + 20, yTargetClickPos + 20]);
   }
