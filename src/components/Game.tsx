@@ -9,26 +9,39 @@ import { checkFirebaseForMatch } from "../helpers/checkFirebaseForMatch";
 
 export function Game(props: propsInterface) {
   const { currentGame } = props;
-  const coordsCollection = `${currentGame!.name}Coords`
   const gameItemTextArr = getGameItemTextArr(currentGame);
   const [boardIsClicked, setBoardIsClicked] = useState(false);
   const [targetPosition, setTargetPosition] = useState<number[]>([]);
   const [dropdownPosition, setDropdownPosition] = useState<number[]>([]);
   const [itemClickPosition, setItemClickPosition] = useState<number[]>([]);
+  const [gameItems, setGameItems] = useState(currentGame!.items);
+  const [Item1, Item2, Item3, Item4] = handleShowItemDiv()!;
 
-  
   function handleTargetAndItemPosition(event: React.MouseEvent) {
-    const { xItemClickPos, yItemClickPos, xTargetClickPos, yTargetClickPos } = getClickPosition(event);
+    const { xItemClickPos, yItemClickPos, xTargetClickPos, yTargetClickPos } =
+      getClickPosition(event);
     setBoardIsClicked(!boardIsClicked);
-    setItemClickPosition([xItemClickPos, yItemClickPos])
+    setItemClickPosition([xItemClickPos, yItemClickPos]);
     setTargetPosition([xTargetClickPos - 23, yTargetClickPos - 23]);
     setDropdownPosition([xTargetClickPos + 20, yTargetClickPos + 20]);
   }
-  async function handleDropdownClick (event: React.MouseEvent<HTMLLIElement>) {
+  async function handleDropdownClick(event: React.MouseEvent<HTMLLIElement>) {
+    setBoardIsClicked(!boardIsClicked);
+    const coordsCollection = `${currentGame!.name}Coords`;
     if (event !== null && event.target instanceof HTMLElement) {
-      await checkFirebaseForMatch(coordsCollection, itemClickPosition[0], itemClickPosition[1], event.target.dataset.id);
-      console.log('qwerty')
+      await checkFirebaseForMatch(
+        coordsCollection,
+        itemClickPosition[0],
+        itemClickPosition[1],
+        event.target.dataset.id,
+        gameItems!,
+        setGameItems
+      );
+      console.log(gameItems);
     }
+  }
+  function handleShowItemDiv() {
+    return gameItems!.filter((e) => e.isFound).map((e) => e.div);
   }
 
   return (
@@ -46,16 +59,28 @@ export function Game(props: propsInterface) {
             currentGame={currentGame}
           >
             <ul>
-              {gameItemTextArr?.map((e, i) => (
-                <DropdownLi key={`${e.name}${i}`} data-id={e.name} onClick={(event) => handleDropdownClick(event)}>{e.text}</DropdownLi>
+              {gameItemTextArr!.map((e, i) => (
+                <DropdownLi
+                  key={`${e.name}${i}`}
+                  data-id={e.name}
+                  onClick={(event) => handleDropdownClick(event)}
+                >
+                  {e.text}
+                </DropdownLi>
               ))}
             </ul>
           </DropdownContainer>
         </>
       )}
+      {Item1 && <Item1 />}
+      {Item2 && <Item2 />}
+      {Item3 && <Item3 />}
+      {Item4 && <Item4 />}
     </StyledCityImageContainer>
   );
 }
+
+//STYLED COMPONENTS//
 
 const Target = styled.div<stylesInterface>`
   left: ${(props) =>
@@ -67,9 +92,9 @@ const Target = styled.div<stylesInterface>`
   height: 50px;
   border-radius: 50%;
   outline: 3px solid ${({ theme }) => theme.colors.main};
-  border: 8px solid ${(props) => props.currentGame?.color};
+  border: 8px solid ${(props) => props.currentGame!.color};
   @media screen and (max-width: 670px) {
-    border: 4px solid ${(props) => props.currentGame?.color};
+    border: 4px solid ${(props) => props.currentGame!.color};
   }
 `;
 
@@ -86,7 +111,7 @@ const DropdownContainer = styled(vFlex)<stylesInterface>`
   display: flex;
   flex-direction: column;
   font-size: 0.8rem;
-  background-color: ${(props) => props.currentGame?.color};
+  background-color: ${(props) => props.currentGame!.color};
 `;
 
 const DropdownLi = styled.li`
