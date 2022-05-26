@@ -13,24 +13,28 @@ export interface propsInterface {
         text: string;
         image: any;
         isFound: boolean;
+        div: any;
       },
       {
         name: string;
         text: string;
         image: any;
         isFound: boolean;
+        div: any;
       },
       {
         name: string;
         text: string;
         image: any;
         isFound: boolean;
+        div: any;
       },
       {
         name: string;
         text: string;
         image: any;
         isFound: boolean;
+        div: any;
       }
     ];
   } | null;
@@ -47,24 +51,28 @@ export interface propsInterface {
           text: string;
           image: any;
           isFound: boolean;
+          div: any;
         },
         {
           name: string;
           text: string;
           image: any;
           isFound: boolean;
+          div: any;
         },
         {
           name: string;
           text: string;
           image: any;
           isFound: boolean;
+          div: any;
         },
         {
           name: string;
           text: string;
           image: any;
           isFound: boolean;
+          div: any;
         }
       ];
     } | null
