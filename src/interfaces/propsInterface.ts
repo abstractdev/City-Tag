@@ -89,4 +89,11 @@ export interface propsInterface {
   setRioLeaderboardIsClicked?: (rioLeaderboardIsClicked: boolean) => void;
   setTokyoLeaderboardIsClicked?: (tokyoLeaderboardIsClicked: boolean) => void;
   setParisLeaderboardIsClicked?: (parisLeaderboardIsClicked: boolean) => void;
+  userModalIsVisible?: boolean;
+  setUserModalIsVisible?: (userModalIsVisible: boolean) => void;
+  leaderboardModalIsVisible?: boolean;
+  setLeaderboardModalIsVisible?: (leaderboardModalIsVisible: boolean) => void;
+  time?: number;
+  currentGameUserData?: any[];
+  setCurrentGameUserData?: (currentGameUserData: any[]) => void;
 }
