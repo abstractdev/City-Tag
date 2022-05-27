@@ -1,9 +1,15 @@
-import { trimData } from "../helpers/trimData";
 import styled from "styled-components";
 import { propsInterface } from "../interfaces/propsInterface";
 import { stylesInterface } from "../interfaces/stylesInterface";
 import { useParams } from "react-router-dom";
 import { getFilteredCityProperties } from "../helpers/getGameData";
+import {
+  StyledTable,
+  StyledTd,
+  StyledTdHeader,
+  StyledTr,
+} from "../shared-styles/leaderboardTable";
+import { makeUserList } from "../helpers/makeUserList";
 
 export function Leaderboard(props: propsInterface) {
   const { cityParam } = useParams();
@@ -12,18 +18,6 @@ export function Leaderboard(props: propsInterface) {
   const { filteredCityName, filteredCityColor, filteredCityFont } =
     getFilteredCityProperties(filteredCityUsers[0].city);
 
-  const sortedUserData = filteredCityUsers!.sort((a: any, b: any) => {
-    return a.time! - b.time!;
-  });
-  const userItems = sortedUserData.map((e: any, i: number) => {
-    return (
-      <tr key={e.id}>
-        <StyledTd>{i + 1}</StyledTd>
-        <StyledTd>{e.name}</StyledTd>
-        <StyledTimeTd>{trimData(e.displayTime)}</StyledTimeTd>
-      </tr>
-    );
-  });
   return (
     <LeaderboardContainer filteredCityColor={filteredCityColor}>
       <StyledH1 filteredCityFont={filteredCityFont}>
@@ -37,38 +31,11 @@ export function Leaderboard(props: propsInterface) {
             <StyledTdHeader>Time</StyledTdHeader>
           </StyledTr>
         </thead>
-        <tbody>{userItems}</tbody>
+        <tbody>{makeUserList(filteredCityUsers!)}</tbody>
       </StyledTable>
     </LeaderboardContainer>
   );
 }
-
-const StyledTable = styled.table`
-  width: 80%;
-  margin: 2rem auto 0 auto;
-  @media screen and (max-width: 670px) {
-    width: 100%;
-  }
-`;
-const StyledTr = styled.tr`
-  border-bottom: 1px solid #121212;
-`;
-
-const StyledTd = styled.td`
-  padding: 0.5rem;
-  max-width: 20ch;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
-const StyledTimeTd = styled(StyledTd)`
-  width: 20%;
-  @media screen and (max-width: 670px) {
-    width: 34%;
-  }
-`;
-const StyledTdHeader = styled(StyledTd)`
-  font-weight: 900;
-`;
 
 const LeaderboardContainer = styled.div<stylesInterface>`
   background-color: ${(props) => props.filteredCityColor};
