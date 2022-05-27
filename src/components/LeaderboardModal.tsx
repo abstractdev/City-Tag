@@ -39,6 +39,7 @@ export function LeaderboardModal(props: propsInterface) {
     <StyledModalContainer>
       <StyledMainModal currentGame={currentGame} ref={mainModalRef}>
         <ModalCloseButton
+          leaderboardModalIsVisible={leaderboardModalIsVisible}
           setLeaderboardModalIsVisible={setLeaderboardModalIsVisible}
         />
         <VFlex>

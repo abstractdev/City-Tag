@@ -40,7 +40,10 @@ export function UserModal(props: propsInterface) {
       {userModalIsVisible && (
         <StyledModalContainer>
           <StyledNameModal ref={nameModalRef}>
-            <ModalCloseButton setUserModalIsVisible={setUserModalIsVisible} />
+            <ModalCloseButton
+              userModalIsVisible={userModalIsVisible}
+              setUserModalIsVisible={setUserModalIsVisible}
+            />
             <VFlex>
               <StyledForm
                 onSubmit={(event) =>

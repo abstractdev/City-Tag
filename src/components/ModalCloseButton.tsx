@@ -4,10 +4,20 @@ import { useNavigate } from "react-router-dom";
 import { propsInterface } from "../interfaces/propsInterface";
 
 export function ModalCloseButton(props: propsInterface) {
-  const { setUserModalIsVisible, setLeaderboardModalIsVisible } = props;
+  const {
+    userModalIsVisible,
+    setUserModalIsVisible,
+    leaderboardModalIsVisible,
+    setLeaderboardModalIsVisible,
+  } = props;
   const navigate = useNavigate();
   function handleSetUserModalIsVisible() {
-    // setUserModalIsVisible(false);
+    if (userModalIsVisible) {
+      setUserModalIsVisible!(false);
+    }
+    if (leaderboardModalIsVisible) {
+      setLeaderboardModalIsVisible!(false);
+    }
     navigate(-1);
     setTimeout(() => {
       navigate(0);
