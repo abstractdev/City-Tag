@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { propsInterface } from "../interfaces/propsInterface";
-import { vFlex } from "../shared-styles/vFlex.styles";
+import { VFlex } from "../shared-styles/VFlex.styles";
 import { Link } from "react-router-dom";
 import { getAllGameImages } from "../helpers/getGameData";
 
@@ -26,7 +26,7 @@ export function Home(props: propsInterface) {
   );
 }
 
-const StyledHomeContainer = styled(vFlex)`
+const StyledHomeContainer = styled(VFlex)`
   padding: 1rem 4rem;
   @media screen and (max-width: 670px) {
     padding: 0 2rem;

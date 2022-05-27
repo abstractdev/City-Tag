@@ -2,20 +2,35 @@ import { useState } from "react";
 import styled from "styled-components";
 import { propsInterface } from "../interfaces/propsInterface";
 import { stylesInterface } from "../interfaces/stylesInterface";
-import { vFlex } from "../shared-styles/vFlex.styles";
+import { VFlex } from "../shared-styles/VFlex.styles";
 import { getGameItemTextArr } from "../helpers/getGameData";
 import { getClickPosition } from "../helpers/getClickPosition";
 import { checkFirebaseForMatch } from "../helpers/checkFirebaseForMatch";
+import { audio } from "../helpers/audio";
+import { UserModal } from "./UserModal";
+import { LeaderboardModal } from "./LeaderboardModal";
 
 export function Game(props: propsInterface) {
-  const { currentGame } = props;
+  const { currentGame, userData } = props;
+  const { endAudio } = audio();
   const gameItemTextArr = getGameItemTextArr(currentGame);
   const [boardIsClicked, setBoardIsClicked] = useState(false);
   const [targetPosition, setTargetPosition] = useState<number[]>([]);
   const [dropdownPosition, setDropdownPosition] = useState<number[]>([]);
   const [itemClickPosition, setItemClickPosition] = useState<number[]>([]);
   const [gameItems, setGameItems] = useState(currentGame!.items);
+  const [userModalIsVisible, setUserModalIsVisible] = useState(false);
+  const [leaderboardModalIsVisible, setLeaderboardModalIsVisible] =
+    useState(false);
+  const [currentGameUserData, setCurrentGameUserData] = useState(
+    getCurrentGameUserData()
+  );
+  const [time, setTime] = useState(0);
   const [Item1, Item2, Item3, Item4] = handleShowItemDiv()!;
+
+  function getCurrentGameUserData() {
+    return userData!.filter((e: any) => e.city === `${currentGame!.name}`);
+  }
 
   function handleTargetAndItemPosition(event: React.MouseEvent) {
     const { xItemClickPos, yItemClickPos, xTargetClickPos, yTargetClickPos } =
@@ -27,8 +42,9 @@ export function Game(props: propsInterface) {
   }
   async function handleDropdownClick(event: React.MouseEvent<HTMLLIElement>) {
     setBoardIsClicked(!boardIsClicked);
-    const coordsCollection = `${currentGame!.name}Coords`;
+    //check Firebase for item click position match and dropdown match
     if (event !== null && event.target instanceof HTMLElement) {
+      const coordsCollection = `${currentGame!.name}Coords`;
       await checkFirebaseForMatch(
         coordsCollection,
         itemClickPosition[0],
@@ -38,6 +54,16 @@ export function Game(props: propsInterface) {
         setGameItems
       );
       console.log(gameItems);
+      //check if all items have been found
+      const checkIfAllItemsFound = (() => {
+        if (gameItems.every((e) => e.isFound)) {
+          setTimeout(() => {
+            console.log("game over");
+            endAudio.play();
+          }, 700);
+          setUserModalIsVisible(true);
+        }
+      })();
     }
   }
   function handleShowItemDiv() {
@@ -76,6 +102,26 @@ export function Game(props: propsInterface) {
       {Item2 && <Item2 />}
       {Item3 && <Item3 />}
       {Item4 && <Item4 />}
+      {userModalIsVisible && (
+        <UserModal
+          userModalIsVisible={userModalIsVisible}
+          setUserModalIsVisible={setUserModalIsVisible}
+          currentGame={currentGame}
+          currentGameUserData={currentGameUserData}
+          setCurrentGameUserData={setCurrentGameUserData}
+          setLeaderboardModalIsVisible={setLeaderboardModalIsVisible}
+          time={time}
+          userData={userData}
+        />
+      )}
+      {leaderboardModalIsVisible && (
+        <LeaderboardModal
+          leaderboardModalIsVisible={leaderboardModalIsVisible}
+          setLeaderboardModalIsVisible={setLeaderboardModalIsVisible}
+          currentGame={currentGame}
+          currentGameUserData={currentGameUserData}
+        />
+      )}
     </StyledCityImageContainer>
   );
 }
@@ -98,7 +144,7 @@ const Target = styled.div<stylesInterface>`
   }
 `;
 
-const DropdownContainer = styled(vFlex)<stylesInterface>`
+const DropdownContainer = styled(VFlex)<stylesInterface>`
   left: ${(props) =>
     props.dropdownPosition!.length && `${props.dropdownPosition![0]}px`};
   top: ${(props) =>
@@ -128,7 +174,7 @@ const StyledCityImage = styled.img`
   height: auto;
   object-fit: contain;
 `;
-const StyledCityImageContainer = styled(vFlex)`
+const StyledCityImageContainer = styled(VFlex)`
   width: 100%;
   height: auto;
   position: relative;

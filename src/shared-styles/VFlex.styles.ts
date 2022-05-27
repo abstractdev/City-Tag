@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const vFlex = styled.div`
+export const VFlex = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;

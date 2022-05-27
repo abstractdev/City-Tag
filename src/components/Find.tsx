@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { vFlex } from "../shared-styles/vFlex.styles";
+import { VFlex } from "../shared-styles/VFlex.styles";
 import { allGames } from "../data/allGames";
 import { propsInterface } from "../interfaces/propsInterface";
 
@@ -39,7 +39,7 @@ const StyledFindContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.main};
 `;
 
-const StyledFindImageContainer = styled(vFlex)`
+const StyledFindImageContainer = styled(VFlex)`
   height: 100px;
   width: 200px;
   gap: 0.3rem;
