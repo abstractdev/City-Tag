@@ -10,7 +10,7 @@ export async function checkFirebaseForMatch(
   gameItems: {}[],
   setGameItems: (gameItems: any) => void
 ) {
-  const { rightAudio, wrongAudio, endAudio } = audio();
+  const { rightAudio, wrongAudio } = audio();
   let coords: {
     name: string;
     xMin: number;
@@ -18,6 +18,11 @@ export async function checkFirebaseForMatch(
     yMin: number;
     yMax: number;
   }[] = [];
+  //store found items in an array
+  const foundItems = gameItems
+    .filter((e: any) => e.isFound)
+    .map((e: any) => e.name);
+  //store the firebase coordinates in an array of objects
   const querySnapshot = await getDocs(collection(db, `${coordsCollection}`));
   querySnapshot.forEach((doc) => {
     coords.push({
@@ -28,15 +33,20 @@ export async function checkFirebaseForMatch(
       yMax: doc.data().y[1],
     });
   });
+  //filter coordinate objects for coordinates that need to be found
+  const notFoundCoords = coords.filter(
+    (e: any) => !foundItems.includes(e.name)
+  );
   //check if coordinates are within item box
   //check if dropdown selection matches
-  for (let i = 0; i < coords.length; i++) {
+  let thereIsAMatch = false;
+  for (let i = 0; i < notFoundCoords.length; i++) {
     if (
-      coords[i].xMin < xItemClickPos &&
-      xItemClickPos < coords[i].xMax &&
-      coords[i].yMin < yItemClickPos &&
-      yItemClickPos < coords[i].yMax &&
-      coords[i].name === dropdownDataId
+      notFoundCoords[i].xMin < xItemClickPos &&
+      xItemClickPos < notFoundCoords[i].xMax &&
+      notFoundCoords[i].yMin < yItemClickPos &&
+      yItemClickPos < notFoundCoords[i].yMax &&
+      notFoundCoords[i].name === dropdownDataId
     ) {
       console.log("match click");
       //set isFound for game item to true
@@ -50,7 +60,12 @@ export async function checkFirebaseForMatch(
           }
         });
       })();
+      thereIsAMatch = true;
       break;
     }
+  }
+  if (!thereIsAMatch) {
+    console.log("wrong");
+    wrongAudio.play();
   }
 }
