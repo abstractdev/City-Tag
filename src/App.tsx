@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Header } from "./components/Header";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "./shared-styles/GlobalStyles.styles";
@@ -6,23 +6,20 @@ import { theme } from "./shared-styles/theme";
 import { Footer } from "./components/Footer";
 import { allGames } from "./data/allGames";
 import { Home } from "./components/Home";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { useGetUserData } from "./custom-hooks/useGetUserData";
-import { propsInterface } from "./interfaces/propsInterface";
 import { Leaderboard } from "./components/Leaderboard";
 import { Game } from "./components/Game";
+import { useResetGameState } from "./custom-hooks/useResetGameState";
 
 function App() {
   const { userData } = useGetUserData();
   const [gameIsActive, setGameIsActive] = useState(false);
   const [currentGame, setCurrentGame] = useState<any>(null);
-  const location = useLocation();
+  const [time, setTime] = useState(0);
+  const [userId, setUserId] = useState("");
 
-  useEffect(() => {
-    if (location.pathname === "/") {
-      setCurrentGame(null);
-    }
-  }, [location]);
+  useResetGameState(setCurrentGame, setGameIsActive, userId);
 
   function handleCurrentGame(event: React.MouseEvent<HTMLDivElement>) {
     allGames.forEach((e) => {
@@ -30,6 +27,7 @@ function App() {
         if (e.name === event.target.dataset.id) {
           setCurrentGame(e);
           e.gameIsActive = true;
+          setGameIsActive(true);
         }
       }
     });
@@ -37,7 +35,14 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <Header gameIsActive={gameIsActive} currentGame={currentGame} />
+      <Header
+        gameIsActive={gameIsActive}
+        currentGame={currentGame}
+        time={time}
+        setTime={setTime}
+        userId={userId}
+        setUserId={setUserId}
+      />
       <Routes>
         <Route
           path="/"
@@ -53,7 +58,14 @@ function App() {
           element={
             <Game
               currentGame={currentGame}
+              gameIsActive={gameIsActive}
+              setGameIsActive={setGameIsActive}
               handleCurrentGame={handleCurrentGame}
+              userData={userData}
+              time={time}
+              setTime={setTime}
+              userId={userId}
+              setUserId={setUserId}
             />
           }
         />
