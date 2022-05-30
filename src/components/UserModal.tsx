@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { clickOutside } from "../helpers/clickOutside";
 import { propsInterface } from "../interfaces/propsInterface";
@@ -17,15 +17,14 @@ export function UserModal(props: propsInterface) {
     userModalIsVisible,
     setUserModalIsVisible,
     time,
-    currentGameUserData,
     setCurrentGameUserData,
     setLeaderboardModalIsVisible,
-    // handleFormSubmit,
-    // handleOnChange,
+    userId,
+    setTimeErrorSpanIsVisible,
   } = props;
+  const [name, setName] = useState("");
   const nameModalRef = useRef<HTMLDivElement | null>(null);
   const navigate = useNavigate();
-  console.log(currentGameUserData);
   useEffect(() => {
     clickOutside(
       userModalIsVisible!,
@@ -34,6 +33,16 @@ export function UserModal(props: propsInterface) {
       navigate
     );
   }, [userModalIsVisible]);
+
+  function handleTimeErrorSpan() {
+    setTimeErrorSpanIsVisible!(true);
+    setTimeout(() => {
+      navigate(-1);
+      setTimeout(() => {
+        navigate(0);
+      }, 200);
+    }, 7000);
+  }
 
   return (
     <>
@@ -52,17 +61,19 @@ export function UserModal(props: propsInterface) {
                     setUserModalIsVisible!,
                     currentGame,
                     time!,
-                    currentGameUserData,
                     setCurrentGameUserData!,
-                    setLeaderboardModalIsVisible!
+                    setLeaderboardModalIsVisible!,
+                    userId!,
+                    name!,
+                    handleTimeErrorSpan
                   )
                 }
               >
                 <VFlex>
                   <label htmlFor="name">Please enter your name</label>
                   <StyledInput
-                    // onChange={handleOnChange}
-                    value="Anonymous"
+                    onChange={(event) => setName(event.target.value)}
+                    value={name}
                     type="text"
                     name="name"
                     id="name"
