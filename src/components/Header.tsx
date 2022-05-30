@@ -1,19 +1,28 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { LeaderboardDropdown } from "./LeaderboardDropdown";
 import { Find } from "./Find";
 import { propsInterface } from "../interfaces/propsInterface";
+import { Timer } from "./Timer";
 
 export function Header(props: propsInterface) {
-  const { currentGame, setCurrentGame } = props;
+  const { currentGame, gameIsActive, time, setTime } = props;
+  const navigate = useNavigate();
+  function goHome() {
+    navigate("/");
+    navigate(0);
+  }
   return (
     <StyledStickyContainer>
       <StyledHeaderContainer>
         <StyledHeaderTextContainer>
-          <StyledHeaderText to="/">
+          <StyledHeaderText to="/" onClick={goHome}>
             CITY TAG
           </StyledHeaderText>
         </StyledHeaderTextContainer>
+        {gameIsActive && (
+          <Timer time={time} setTime={setTime} gameIsActive={gameIsActive} />
+        )}
         <LeaderboardDropdown />
       </StyledHeaderContainer>
       {currentGame && <Find currentGame={currentGame} />}
