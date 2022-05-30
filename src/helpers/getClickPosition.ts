@@ -8,7 +8,6 @@ export function getClickPosition(event: any) {
   );
   const xTargetClickPos = event.nativeEvent.clientX - rect.left;
   const yTargetClickPos = event.nativeEvent.clientY - rect.top;
-
   return {
     xItemClickPos,
     yItemClickPos,

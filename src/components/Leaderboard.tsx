@@ -17,7 +17,6 @@ export function Leaderboard(props: propsInterface) {
   const filteredCityUsers = userData!.filter((e: any) => e.city === cityParam);
   const { filteredCityName, filteredCityColor, filteredCityFont } =
     getFilteredCityProperties(filteredCityUsers[0].city);
-
   return (
     <LeaderboardContainer filteredCityColor={filteredCityColor}>
       <StyledH1 filteredCityFont={filteredCityFont}>
