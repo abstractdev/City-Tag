@@ -8,7 +8,8 @@ export async function checkFirebaseForMatch(
   yItemClickPos: number,
   dropdownDataId: string | undefined,
   gameItems: {}[],
-  setGameItems: (gameItems: any) => void
+  setGameItems: (gameItems: any) => void,
+  handleClickErrorSpan: () => void
 ) {
   const { rightAudio, wrongAudio } = audio();
   let coords: {
@@ -48,7 +49,6 @@ export async function checkFirebaseForMatch(
       yItemClickPos < notFoundCoords[i].yMax &&
       notFoundCoords[i].name === dropdownDataId
     ) {
-      console.log("match click");
       //set isFound for game item to true
       rightAudio.play();
       const gameItemsClone = [...gameItems];
@@ -65,7 +65,7 @@ export async function checkFirebaseForMatch(
     }
   }
   if (!thereIsAMatch) {
-    console.log("wrong");
     wrongAudio.play();
+    handleClickErrorSpan();
   }
 }
