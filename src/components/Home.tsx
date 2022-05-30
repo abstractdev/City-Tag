@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { getAllGameImages } from "../helpers/getGameData";
 
 export function Home(props: propsInterface) {
-  const { currentGame, handleCurrentGame } = props;
+  const { handleCurrentGame } = props;
   const allGameImages = getAllGameImages();
   return (
     <StyledHomeContainer onClick={handleCurrentGame}>
@@ -13,7 +13,7 @@ export function Home(props: propsInterface) {
       <StyledHomeContent>
         {allGameImages.map((e, i) => {
           return (
-            <Link to={`/game/${e.name}`} key={i}>
+            <Link to={`/game/${e.name}`} key={e.name + "board"}>
               <StyledHomeImageContainer
                 data-id={e.name}
                 style={{ backgroundImage: `url(${e.gameImage})` }}
