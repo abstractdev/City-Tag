@@ -1,6 +1,7 @@
 export interface propsInterface {
   name?: string;
   gameIsActive?: boolean;
+  setGameIsActive?: (gameIsActive: boolean) => void;
   currentGame?: {
     name: string;
     displayName: string;
@@ -81,19 +82,16 @@ export interface propsInterface {
   handleCurrentGame?: (event: React.MouseEvent<HTMLDivElement>) => void;
   userData?: any[];
   setUserData?: (userData: any[]) => void;
-  nyLeaderboardIsClicked?: boolean;
-  rioLeaderboardIsClicked?: boolean;
-  tokyoLeaderboardIsClicked?: boolean;
-  parisLeaderboardIsClicked?: boolean;
-  setNyLeaderboardIsClicked?: (nyLeaderboardIsClicked: boolean) => void;
-  setRioLeaderboardIsClicked?: (rioLeaderboardIsClicked: boolean) => void;
-  setTokyoLeaderboardIsClicked?: (tokyoLeaderboardIsClicked: boolean) => void;
-  setParisLeaderboardIsClicked?: (parisLeaderboardIsClicked: boolean) => void;
   userModalIsVisible?: boolean;
   setUserModalIsVisible?: (userModalIsVisible: boolean) => void;
   leaderboardModalIsVisible?: boolean;
   setLeaderboardModalIsVisible?: (leaderboardModalIsVisible: boolean) => void;
   time?: number;
+  setTime?: any;
   currentGameUserData?: any[];
   setCurrentGameUserData?: (currentGameUserData: any[]) => void;
+  userId?: string;
+  setUserId?: (userId: string) => void;
+  timeErrorSpanIsVisible?: boolean;
+  setTimeErrorSpanIsVisible?: (timeErrorSpanIsVisible: boolean) => void;
 }

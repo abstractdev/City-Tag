@@ -33,4 +33,5 @@ export interface stylesInterface {
       }
     ];
   } | null;
+  gameIsActive?: boolean;
 }
