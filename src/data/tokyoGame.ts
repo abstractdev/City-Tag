@@ -1,3 +1,10 @@
+import {
+  GeishaDiv,
+  ParasolDiv,
+  SumoDiv,
+  SushiDiv,
+} from "../shared-styles/tokyoItemDiv.style";
+
 const tokyoGame = {
   name: "tokyo",
   displayName: "Tokyo",
@@ -9,25 +16,29 @@ const tokyoGame = {
       name: "geisha",
       text: "Geisha",
       image: require("../assets/images/tokyo/geisha.jpg"),
-      isFound: false
+      isFound: false,
+      div: GeishaDiv,
     },
     {
       name: "parasol",
       text: "Parasol",
       image: require("../assets/images/tokyo/parasol.jpg"),
-      isFound: false
+      isFound: false,
+      div: ParasolDiv,
     },
     {
       name: "sumo",
       text: "Sumo Wrestler",
       image: require("../assets/images/tokyo/sumo.jpg"),
-      isFound: false
+      isFound: false,
+      div: SumoDiv,
     },
     {
       name: "sushi",
       text: "Sushi",
       image: require("../assets/images/tokyo/sushi.jpg"),
-      isFound: false
+      isFound: false,
+      div: SushiDiv,
     },
   ],
 };

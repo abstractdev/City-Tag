@@ -1,3 +1,10 @@
+import {
+  BrieDiv,
+  FleurDiv,
+  MonaLisaDiv,
+  TophatDiv,
+} from "../shared-styles/parisItemDivs.styles";
+
 const parisGame = {
   name: "paris",
   displayName: "Paris",
@@ -9,25 +16,29 @@ const parisGame = {
       name: "brie",
       text: "Brie",
       image: require("../assets/images/paris/brie.jpg"),
-      isFound: false
+      isFound: false,
+      div: BrieDiv,
     },
     {
       name: "fleurdelis",
       text: "Fleur De Lis",
       image: require("../assets/images/paris/fleurdelis.jpg"),
-      isFound: false
+      isFound: false,
+      div: FleurDiv,
     },
     {
       name: "monalisa",
       text: "Mona Lisa",
       image: require("../assets/images/paris/monalisa.jpg"),
-      isFound: false
+      isFound: false,
+      div: MonaLisaDiv,
     },
     {
       name: "tophat",
       text: "Tophat",
       image: require("../assets/images/paris/tophat.jpg"),
-      isFound: false
+      isFound: false,
+      div: TophatDiv,
     },
   ],
 };
