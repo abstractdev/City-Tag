@@ -24,7 +24,4 @@ export const StyledTdHeader = styled(StyledTd)`
 
 export const StyledTimeTd = styled(StyledTd)`
   width: 20%;
-  @media screen and (max-width: 670px) {
-    width: 34%;
-  }
 `;
