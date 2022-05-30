@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import { useState, useRef, useEffect } from "react";
 import { clickOutside } from "../helpers/clickOutside";
+import { allGames } from "../data/allGames";
 
 export function LeaderboardDropdown() {
   const containerRef = useRef<any>();
@@ -35,30 +36,18 @@ export function LeaderboardDropdown() {
         {dropdownIsOpen && (
           <StyledLeaderboardDropdownContainer>
             <ul>
-              <StyledLink
-                to="/leaderboard/ny"
-                onClick={() => setDropdownIsOpen(false)}
-              >
-                <StyledLi>New York</StyledLi>
-              </StyledLink>
-              <StyledLink
-                to="/leaderboard/rio"
-                onClick={() => setDropdownIsOpen(false)}
-              >
-                <StyledLi>Rio De Janeiro</StyledLi>
-              </StyledLink>
-              <StyledLink
-                to="/leaderboard/tokyo"
-                onClick={() => setDropdownIsOpen(false)}
-              >
-                <StyledLi>Tokyo</StyledLi>
-              </StyledLink>
-              <StyledLink
-                to="/leaderboard/paris"
-                onClick={() => setDropdownIsOpen(false)}
-              >
-                <StyledLi>Paris</StyledLi>
-              </StyledLink>
+              {allGames.map((e) => {
+                return (
+                  <StyledLink
+                    data-id={e.name}
+                    to={`/leaderboard/${e.name}`}
+                    key={e.name + "lb"}
+                    onClick={() => setDropdownIsOpen(false)}
+                  >
+                    <StyledLi data-id={e.name}>{e.displayName}</StyledLi>
+                  </StyledLink>
+                );
+              })}
             </ul>
           </StyledLeaderboardDropdownContainer>
         )}
