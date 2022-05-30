@@ -1,4 +1,12 @@
-import { doc, getDocs, deleteDoc, query, collection } from "firebase/firestore";
+import {
+  doc,
+  getDocs,
+  deleteDoc,
+  query,
+  where,
+  collection,
+  setDoc,
+} from "firebase/firestore";
 import { db } from "../config/firebase";
 
 export function handleFormSubmit(
@@ -6,27 +14,61 @@ export function handleFormSubmit(
   setUserModalIsVisible: (arg0: boolean) => void,
   currentGame: any,
   time: number,
-  currentGameUserData: any,
   setCurrentGameUserData: (arg0: any[]) => void,
-  setLeaderboardModalIsVisible: (arg0: boolean) => void
+  setLeaderboardModalIsVisible: (arg0: boolean) => void,
+  userId: string,
+  name: string,
+  handleTimeErrorSpan: () => void
 ) {
   event.preventDefault();
   event.target.reset();
   setUserModalIsVisible(false);
-  console.log("form submitted");
-  setLeaderboardModalIsVisible(true);
-  console.log(currentGameUserData);
-  const currentGameScores = currentGameUserData.map(
-    (e: { time: number }) => e.time
-  );
-  const highestTime = Math.max(...currentGameScores);
   setTimeout(() => {
-    const getUserDataFromFirebase = (async () => {
-      //validate score
-      //add user score to leaderboard if there is room
-      // setLeaderboardIsVisible(true);
-      //if there is not enough room but the score qualifies, remove the highest time from array and firebase
-      //otherwise remove user
+    const validateDeleteAndAddUserToFirebase = (async () => {
+      //add name to firebase
+      const userRef = doc(db, "users", userId);
+      await setDoc(
+        userRef,
+        { name: name === "" ? "Anonymous" : name },
+        { merge: true }
+      );
+      //gather all current game user data and add to array
+      let currentGameUsers: any[] = [];
+      const usersRef = collection(db, "users");
+      const q = query(usersRef, where("city", "==", `${currentGame.name}`));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        currentGameUsers.push(doc.data());
+      });
+      //extract backend times from each user
+      const times = currentGameUsers.map((e) => e.backendTime);
+      const highestTime = Math.max(...times);
+      // add user time to leaderboard if there is room
+      if (time < highestTime && currentGameUsers.length <= 2) {
+        setCurrentGameUserData([...currentGameUsers]);
+        setLeaderboardModalIsVisible(true);
+      }
+      //if there is not enough room but the time qualifies, remove the highest time from array and firebase
+      else if (time < highestTime && currentGameUsers.length === 3) {
+        const removeHighest = (async () => {
+          const highestUser = currentGameUsers.find(
+            (e) => e.backendTime === highestTime
+          );
+          await deleteDoc(doc(db, "users", highestUser.id));
+          const removeHighestUserFromArray = (() => {
+            currentGameUsers = currentGameUsers.filter((e) => {
+              return e.backendTime !== highestTime;
+            });
+          })();
+          setCurrentGameUserData([...currentGameUsers]);
+          setLeaderboardModalIsVisible(true);
+        })();
+        //otherwise remove user
+      } else {
+        await deleteDoc(doc(db, "users", userId));
+        setLeaderboardModalIsVisible(false);
+        handleTimeErrorSpan();
+      }
     })();
   }, 100);
 }
