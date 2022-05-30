@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { propsInterface } from "../interfaces/propsInterface";
 import { stylesInterface } from "../interfaces/stylesInterface";
@@ -9,9 +9,21 @@ import { checkFirebaseForMatch } from "../helpers/checkFirebaseForMatch";
 import { audio } from "../helpers/audio";
 import { UserModal } from "./UserModal";
 import { LeaderboardModal } from "./LeaderboardModal";
+import { setDoc, doc, collection, Timestamp, getDoc } from "firebase/firestore";
+import { db } from "../config/firebase";
+import { ClickErrorSpan, TimeErrorSpan } from "./ErrorSpan";
 
 export function Game(props: propsInterface) {
-  const { currentGame, userData } = props;
+  const {
+    currentGame,
+    gameIsActive,
+    setGameIsActive,
+    userData,
+    time,
+    setTime,
+    userId,
+    setUserId,
+  } = props;
   const { endAudio } = audio();
   const gameItemTextArr = getGameItemTextArr(currentGame);
   const [boardIsClicked, setBoardIsClicked] = useState(false);
@@ -25,8 +37,39 @@ export function Game(props: propsInterface) {
   const [currentGameUserData, setCurrentGameUserData] = useState(
     getCurrentGameUserData()
   );
-  const [time, setTime] = useState(0);
   const [Item1, Item2, Item3, Item4] = handleShowItemDiv()!;
+  const [clickErrorSpanIsVisible, setClickErrorSpanIsVisible] = useState(false);
+  const [timeErrorSpanIsVisible, setTimeErrorSpanIsVisible] = useState(false);
+
+  useEffect(() => {
+    const docRef = doc(collection(db, "users"));
+    if (gameIsActive) {
+      setDoc(docRef, {
+        id: docRef.id,
+        city: `${currentGame!.name}`,
+        start: Timestamp.now().toMillis(),
+      });
+      setUserId!(docRef.id);
+    } else if (!gameIsActive) {
+      //get doc by id and calculate backend time
+      (async () => {
+        let backendTime: number;
+        const userRef = doc(db, "users", userId!);
+        const userSnap = await getDoc(userRef);
+        if (userSnap) {
+          backendTime = Timestamp.now().toMillis() - userSnap.data()!.start;
+          setTime!(backendTime);
+          setDoc(
+            userRef,
+            {
+              backendTime: backendTime!,
+            },
+            { merge: true }
+          );
+        }
+      })();
+    }
+  }, [gameIsActive]);
 
   function getCurrentGameUserData() {
     return userData!.filter((e: any) => e.city === `${currentGame!.name}`);
@@ -51,23 +94,31 @@ export function Game(props: propsInterface) {
         itemClickPosition[1],
         event.target.dataset.id,
         gameItems!,
-        setGameItems
+        setGameItems,
+        handleClickErrorSpan
       );
-      console.log(gameItems);
-      //check if all items have been found
       const checkIfAllItemsFound = (() => {
         if (gameItems.every((e) => e.isFound)) {
+          setGameIsActive!(false);
           setTimeout(() => {
-            console.log("game over");
             endAudio.play();
           }, 700);
-          setUserModalIsVisible(true);
+          setTimeout(() => {
+            setUserModalIsVisible(true);
+          }, 2000);
         }
       })();
     }
   }
   function handleShowItemDiv() {
     return gameItems!.filter((e) => e.isFound).map((e) => e.div);
+  }
+
+  function handleClickErrorSpan() {
+    setClickErrorSpanIsVisible(true);
+    setTimeout(() => {
+      setClickErrorSpanIsVisible(false);
+    }, 2000);
   }
 
   return (
@@ -87,7 +138,7 @@ export function Game(props: propsInterface) {
             <ul>
               {gameItemTextArr!.map((e, i) => (
                 <DropdownLi
-                  key={`${e.name}${i}`}
+                  key={e.name + "item"}
                   data-id={e.name}
                   onClick={(event) => handleDropdownClick(event)}
                 >
@@ -112,6 +163,8 @@ export function Game(props: propsInterface) {
           setLeaderboardModalIsVisible={setLeaderboardModalIsVisible}
           time={time}
           userData={userData}
+          userId={userId}
+          setTimeErrorSpanIsVisible={setTimeErrorSpanIsVisible}
         />
       )}
       {leaderboardModalIsVisible && (
@@ -122,6 +175,8 @@ export function Game(props: propsInterface) {
           currentGameUserData={currentGameUserData}
         />
       )}
+      {clickErrorSpanIsVisible && <ClickErrorSpan />}
+      {timeErrorSpanIsVisible && <TimeErrorSpan />}
     </StyledCityImageContainer>
   );
 }
@@ -158,6 +213,7 @@ const DropdownContainer = styled(VFlex)<stylesInterface>`
   flex-direction: column;
   font-size: 0.8rem;
   background-color: ${(props) => props.currentGame!.color};
+  z-index: 2;
 `;
 
 const DropdownLi = styled.li`
