@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { AiOutlineGithub, AiOutlineBehanceSquare } from "react-icons/ai";
+import { VFlex } from "../shared-styles/VFlex.styles";
 
 export function Footer() {
   return (
@@ -11,7 +12,9 @@ export function Footer() {
             rel="noreferrer noopener"
             href="https://github.com/abstractdev"
           >
-            <StyledBehanceLogo />
+            <VFlex>
+              <AiOutlineBehanceSquare />
+            </VFlex>
           </StyledLink>
           <StyledLink
             target="_blank"
@@ -28,7 +31,9 @@ export function Footer() {
             rel="noreferrer noopener"
             href="https://github.com/abstractdev"
           >
-            <StyledGithubLogo />
+            <VFlex>
+              <AiOutlineGithub />
+            </VFlex>
           </StyledLink>
           <StyledLink
             target="_blank"
@@ -71,15 +76,4 @@ const StyledDiv = styled.div`
   justify-content: center;
   align-items: center;
   gap: 0.08rem;
-`;
-
-const StyledGithubLogo = styled(AiOutlineGithub)`
-  @media screen and (max-width: 644px) {
-    display: none;
-  }
-`;
-const StyledBehanceLogo = styled(AiOutlineBehanceSquare)`
-  @media screen and (max-width: 644px) {
-    display: none;
-  }
 `;
