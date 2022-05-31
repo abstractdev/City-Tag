@@ -44,12 +44,12 @@ export function handleFormSubmit(
       const times = currentGameUsers.map((e) => e.backendTime);
       const highestTime = Math.max(...times);
       // add user time to leaderboard if there is room
-      if (time < highestTime && currentGameUsers.length <= 2) {
+      if (time < highestTime && currentGameUsers.length <= 19) {
         setCurrentGameUserData([...currentGameUsers]);
         setLeaderboardModalIsVisible(true);
       }
       //if there is not enough room but the time qualifies, remove the highest time from array and firebase
-      else if (time < highestTime && currentGameUsers.length === 3) {
+      else if (time < highestTime && currentGameUsers.length === 20) {
         const removeHighest = (async () => {
           const highestUser = currentGameUsers.find(
             (e) => e.backendTime === highestTime
