@@ -207,7 +207,7 @@ const DropdownContainer = styled(VFlex)<stylesInterface>`
     props.dropdownPosition!.length && `${props.dropdownPosition![1]}px`};
   position: absolute;
   width: 132px;
-  height: 100px;
+  height: 106px;
   border: 3px solid ${({ theme }) => theme.colors.main};
   border-radius: 5px;
   display: flex;
