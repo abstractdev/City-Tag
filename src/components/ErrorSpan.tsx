@@ -11,16 +11,16 @@ export function ClickErrorSpan() {
 export function TimeErrorSpan() {
   return (
     <>
-      <StyledErrorSpan>
+      <StyledTimeErrorSpan>
         Your time did not qualify for the leaderboard.
         <br />
         Please try again
-      </StyledErrorSpan>
+      </StyledTimeErrorSpan>
     </>
   );
 }
 
-export const StyledErrorSpan = styled.span`
+const StyledErrorSpan = styled.span`
   color: red;
   background-color: ${({ theme }) => theme.colors.white};
   position: fixed;
@@ -32,4 +32,8 @@ export const StyledErrorSpan = styled.span`
   z-index: 10;
   font-family: "metropolisB";
   text-align: center;
+`;
+
+const StyledTimeErrorSpan = styled(StyledErrorSpan)`
+  font-size: 2rem;
 `;
