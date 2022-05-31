@@ -51,7 +51,7 @@ const TimerDiv = styled.div<stylesInterface>`
   @media screen and (max-width: 670px) {
     font-size: 0.6rem;
   }
-  animation: ${spinIn} 1s ease;
+  animation: ${spinIn} 2s ease;
 `;
 const TimerSpan = styled.span`
   color: ${({ theme }) => theme.colors.white};

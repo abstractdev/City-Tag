@@ -5,26 +5,6 @@ export const dropIn = keyframes`
   opacity: 0;
   transform: translate(0,-300px) scale(0.9, 1.1);
 }
-95% {
-  opacity: 1;
-  transform: translate(0, 0) scale(0.9, 1.1);
-}
-96% {
-  opacity: 1;
-  transform: translate(10px, 0) scale(1.2, 0.9);
-}
-97% {
-  opacity: 1;
-  transform: translate(-10px, 0) scale(1.2, 0.9);
-}
-98% {
-  opacity: 1;
-  transform: translate(5px, 0) scale(1.1, 0.9);
-}
-99% {
-  opacity: 1;
-  transform: translate(-5px, 0) scale(1.1, 0.9);
-}
 100% {
   opacity: 1;
   transform: translate(0, 0) scale(1, 1);

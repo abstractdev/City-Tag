@@ -38,7 +38,7 @@ const StyledFindContainer = styled.div`
   color: ${({ theme }) => theme.colors.white};
   font-family: "metropolis";
   background-color: ${({ theme }) => theme.colors.main};
-  animation: ${dropIn} 0.75s ease;
+  animation: ${dropIn} 1s ease;
 `;
 
 const StyledFindImageContainer = styled(VFlex)`
@@ -49,7 +49,7 @@ const StyledFindImageContainer = styled(VFlex)`
     font-size: 0;
     height: 60px;
   }
-`;
+  `;
 
 const StyledFindImage = styled.img`
   width: 100%;
