@@ -19,13 +19,13 @@ All images by Gus Morais.
 - Typescript
 - Styled Components
 - React
-- React Icons
 - React Router
 - Firebase
 - GNU Image Manipulation Program
 ## Concepts / Things I learned
 - Typescript basics
 - Styled Components basics
+- Animations
 - Using coordinates
 - Using dropdowns in React/click outside to close
 - Using timers
