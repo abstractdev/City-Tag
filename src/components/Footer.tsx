@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { AiOutlineGithub, AiOutlineBehanceSquare } from "react-icons/ai";
-import { VFlex } from "../shared-styles/VFlex.styles";
+import github from "../assets/images/GitHub-Mark-Light-32px.png";
+import behance from "../assets/images/behance.png";
 
 export function Footer() {
   return (
@@ -10,18 +10,15 @@ export function Footer() {
           <StyledLink
             target="_blank"
             rel="noreferrer noopener"
-            href="https://github.com/abstractdev"
+            href="http://www.behance.net/gusmorais"
           >
-            <VFlex>
-              <AiOutlineBehanceSquare />
-            </VFlex>
+            <StyledImg src={behance} alt="behance icon" />
           </StyledLink>
           <StyledLink
             target="_blank"
             rel="noreferrer noopener"
             href="http://www.behance.net/gusmorais"
           >
-            {" "}
             Images by Gus Morais
           </StyledLink>
         </StyledDiv>
@@ -31,16 +28,13 @@ export function Footer() {
             rel="noreferrer noopener"
             href="https://github.com/abstractdev"
           >
-            <VFlex>
-              <AiOutlineGithub />
-            </VFlex>
+            <StyledImg src={github} alt="github icon" />
           </StyledLink>
           <StyledLink
             target="_blank"
             rel="noreferrer noopener"
             href="https://github.com/abstractdev"
           >
-            {" "}
             Site by abstractdev
           </StyledLink>
         </StyledDiv>
@@ -75,5 +69,11 @@ const StyledDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.08rem;
+  gap: 0.2rem;
+`;
+
+const StyledImg = styled.img`
+  @media screen and (max-width: 644px) {
+    display: none;
+  }
 `;
