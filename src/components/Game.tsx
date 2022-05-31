@@ -12,6 +12,7 @@ import { LeaderboardModal } from "./LeaderboardModal";
 import { setDoc, doc, collection, Timestamp, getDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { ClickErrorSpan, TimeErrorSpan } from "./ErrorSpan";
+import { fadeIn } from "../shared-styles/keyframes.styles";
 
 export function Game(props: propsInterface) {
   const {
@@ -214,6 +215,7 @@ const DropdownContainer = styled(VFlex)<stylesInterface>`
   font-size: 0.8rem;
   background-color: ${(props) => props.currentGame!.color};
   z-index: 2;
+  animation: ${fadeIn} 0.3s ease-in;
 `;
 
 const DropdownLi = styled.li`

@@ -10,6 +10,7 @@ import {
   StyledModal,
   StyledModalContainer,
 } from "../shared-styles/modal.styles";
+import { growIn } from "../shared-styles/keyframes.styles";
 
 export function UserModal(props: propsInterface) {
   const {
@@ -105,6 +106,7 @@ const StyledNameModal = styled(StyledModal)`
     height: 180px;
     width: 300px;
   }
+  animation: ${growIn} 0.5s ease;
 `;
 const StyledForm = styled.form`
   width: 100%;

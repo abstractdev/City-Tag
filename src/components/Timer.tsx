@@ -3,6 +3,7 @@ import { convertMsToDisplayTime } from "../helpers/convertMsToDisplayTime";
 import { propsInterface } from "../interfaces/propsInterface";
 import { stylesInterface } from "../interfaces/stylesInterface";
 import { useEffect, useRef } from "react";
+import { spinIn } from "../shared-styles/keyframes.styles";
 
 export function Timer(props: propsInterface) {
   const { time, setTime, gameIsActive } = props;
@@ -50,6 +51,7 @@ const TimerDiv = styled.div<stylesInterface>`
   @media screen and (max-width: 670px) {
     font-size: 0.6rem;
   }
+  animation: ${spinIn} 1s ease;
 `;
 const TimerSpan = styled.span`
   color: ${({ theme }) => theme.colors.white};

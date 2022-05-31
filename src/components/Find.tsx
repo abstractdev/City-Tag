@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { VFlex } from "../shared-styles/VFlex.styles";
 import { allGames } from "../data/allGames";
 import { propsInterface } from "../interfaces/propsInterface";
+import { dropIn } from "../shared-styles/keyframes.styles";
 
 export function Find(props: propsInterface) {
   const { currentGame } = props;
@@ -37,6 +38,7 @@ const StyledFindContainer = styled.div`
   color: ${({ theme }) => theme.colors.white};
   font-family: "metropolis";
   background-color: ${({ theme }) => theme.colors.main};
+  animation: ${dropIn} 0.75s ease;
 `;
 
 const StyledFindImageContainer = styled(VFlex)`

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { pulsate } from "./keyframes.styles";
 
 const NewYorkDiv = styled.div`
   position: absolute;
@@ -9,6 +10,7 @@ const NewYorkDiv = styled.div`
     outline: 1px solid ${({ theme }) => theme.colors.main};
   }
   border-radius: 5px;
+  animation: ${pulsate} 2s ease infinite;
 `;
 export const BroadwayDiv = styled(NewYorkDiv)`
   width: 7%;

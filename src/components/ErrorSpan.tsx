@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { fadeIn } from "../shared-styles/keyframes.styles";
 
 export function ClickErrorSpan() {
   return (
@@ -28,10 +29,12 @@ const StyledErrorSpan = styled.span`
   bottom: 50%;
   transform: translateX(-50%);
   padding: 0.5rem;
+  border: 5px solid red;
   border-radius: 5px;
   z-index: 10;
   font-family: "metropolisB";
   text-align: center;
+  animation: ${fadeIn} 0.3s ease;
 `;
 
 const StyledTimeErrorSpan = styled(StyledErrorSpan)`

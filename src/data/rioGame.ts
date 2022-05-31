@@ -35,7 +35,7 @@ const rioGame = {
     },
     {
       name: "soccer",
-      text: "Soccer ball",
+      text: "Soccer Ball",
       image: require("../assets/images/rio/soccer.jpg"),
       isFound: false,
       div: SoccerDiv,
