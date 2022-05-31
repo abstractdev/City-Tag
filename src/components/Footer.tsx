@@ -73,6 +73,8 @@ const StyledDiv = styled.div`
 `;
 
 const StyledImg = styled.img`
+  max-width: 16px;
+  max-height: 16px;
   @media screen and (max-width: 644px) {
     display: none;
   }
