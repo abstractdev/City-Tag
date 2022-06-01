@@ -29,7 +29,7 @@ export function handleFormSubmit(
       const userRef = doc(db, "users", userId);
       await setDoc(
         userRef,
-        { name: name === "" ? "Anonymous" : name },
+        { name: !name ? "Anonymous" : name },
         { merge: true }
       );
       //gather all current game user data and add to array
