@@ -55,7 +55,7 @@ function App() {
             />
           }
         />
-        {currentGame && gameIsActive && (
+        {currentGame && (
           <Route
             path="/game/:cityParam"
             element={
