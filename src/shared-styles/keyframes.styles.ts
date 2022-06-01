@@ -1,16 +1,5 @@
 import { keyframes } from "styled-components";
 
-export const dropIn = keyframes`
-0% {
-  opacity: 0;
-  transform: translate(0,-300px) scale(0.9, 1.1);
-}
-100% {
-  opacity: 1;
-  transform: translate(0, 0) scale(1, 1);
-  }
-`;
-
 export const fadeIn = keyframes`
   0% { opacity: 0; }
   100% { opacity: 1; }
@@ -45,5 +34,41 @@ export const pulsate = keyframes`
   }
   100% {
     transform: scale(1);
+  }
+`;
+export const bounceIn = keyframes`
+  0% {
+    transform: translateY(-500px);
+    animation-timing-function: ease-in;
+    opacity: 0;
+  }
+  38% {
+    transform: translateY(0);
+    animation-timing-function: ease-out;
+    opacity: 1;
+  }
+  55% {
+    transform: translateY(-65px);
+    animation-timing-function: ease-in;
+  }
+  72% {
+    transform: translateY(0);
+    animation-timing-function: ease-out;
+  }
+  81% {
+    transform: translateY(-28px);
+    animation-timing-function: ease-in;
+  }
+  90% {
+    transform: translateY(0);
+    animation-timing-function: ease-out;
+  }
+  95% {
+    transform: translateY(-8px);
+    animation-timing-function: ease-in;
+  }
+  100% {
+    transform: translateY(0);
+    animation-timing-function: ease-out;
   }
 `;
