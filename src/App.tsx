@@ -11,8 +11,6 @@ import { useGetUserData } from "./custom-hooks/useGetUserData";
 import { Leaderboard } from "./components/Leaderboard";
 import { Game } from "./components/Game";
 import { useResetGameState } from "./custom-hooks/useResetGameState";
-import { useGameRedirect } from "./custom-hooks/useGameRedirect";
-
 function App() {
   const { userData } = useGetUserData();
   const [gameIsActive, setGameIsActive] = useState(false);
@@ -20,7 +18,6 @@ function App() {
   const [time, setTime] = useState(0);
   const [userId, setUserId] = useState("");
 
-  useGameRedirect(currentGame, setCurrentGame, setGameIsActive);
   useResetGameState(setCurrentGame, setGameIsActive, userId);
 
   function handleCurrentGame(event: React.MouseEvent<HTMLDivElement>) {
