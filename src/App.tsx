@@ -11,6 +11,7 @@ import { useGetUserData } from "./custom-hooks/useGetUserData";
 import { Leaderboard } from "./components/Leaderboard";
 import { Game } from "./components/Game";
 import { useResetGameState } from "./custom-hooks/useResetGameState";
+import { useGameRedirect } from "./custom-hooks/useGameRedirect";
 
 function App() {
   const { userData } = useGetUserData();
@@ -19,6 +20,7 @@ function App() {
   const [time, setTime] = useState(0);
   const [userId, setUserId] = useState("");
 
+  useGameRedirect(currentGame, setCurrentGame, setGameIsActive);
   useResetGameState(setCurrentGame, setGameIsActive, userId);
 
   function handleCurrentGame(event: React.MouseEvent<HTMLDivElement>) {
@@ -53,26 +55,31 @@ function App() {
             />
           }
         />
-        <Route
-          path="/game/:cityParam"
-          element={
-            <Game
-              currentGame={currentGame}
-              gameIsActive={gameIsActive}
-              setGameIsActive={setGameIsActive}
-              handleCurrentGame={handleCurrentGame}
-              userData={userData}
-              time={time}
-              setTime={setTime}
-              userId={userId}
-              setUserId={setUserId}
-            />
-          }
-        />
-        <Route
-          path="/leaderboard/:cityParam"
-          element={<Leaderboard userData={userData} />}
-        />
+        {currentGame && gameIsActive && (
+          <Route
+            path="/game/:cityParam"
+            element={
+              <Game
+                currentGame={currentGame}
+                setCurrentGame={setCurrentGame}
+                gameIsActive={gameIsActive}
+                setGameIsActive={setGameIsActive}
+                handleCurrentGame={handleCurrentGame}
+                userData={userData}
+                time={time}
+                setTime={setTime}
+                userId={userId}
+                setUserId={setUserId}
+              />
+            }
+          />
+        )}
+        {userData && (
+          <Route
+            path="/leaderboard/:cityParam"
+            element={<Leaderboard userData={userData} />}
+          />
+        )}
       </Routes>
       <Footer />
     </ThemeProvider>

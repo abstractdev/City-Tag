@@ -20,12 +20,12 @@ export function Header(props: propsInterface) {
             CITY TAG
           </StyledHeaderText>
         </StyledHeaderTextContainer>
-        {gameIsActive && (
+        {currentGame && gameIsActive && (
           <Timer time={time} setTime={setTime} gameIsActive={gameIsActive} />
         )}
         <LeaderboardDropdown />
       </StyledHeaderContainer>
-      {currentGame && <Find currentGame={currentGame} />}
+      {currentGame && gameIsActive && <Find currentGame={currentGame} />}
     </StyledStickyContainer>
   );
 }
