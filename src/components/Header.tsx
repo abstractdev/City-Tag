@@ -6,7 +6,14 @@ import { propsInterface } from "../interfaces/propsInterface";
 import { Timer } from "./Timer";
 
 export function Header(props: propsInterface) {
-  const { currentGame, gameIsActive, time, setTime } = props;
+  const {
+    currentGame,
+    gameIsActive,
+    time,
+    setTime,
+    currentLeaderboard,
+    setCurrentLeaderboard,
+  } = props;
   const navigate = useNavigate();
   function goHome() {
     navigate("/");
@@ -20,12 +27,14 @@ export function Header(props: propsInterface) {
             CITY TAG
           </StyledHeaderText>
         </StyledHeaderTextContainer>
-        {currentGame && gameIsActive && (
+        {currentGame && gameIsActive && !currentLeaderboard && (
           <Timer time={time} setTime={setTime} gameIsActive={gameIsActive} />
         )}
-        <LeaderboardDropdown />
+        <LeaderboardDropdown setCurrentLeaderboard={setCurrentLeaderboard} />
       </StyledHeaderContainer>
-      {currentGame && gameIsActive && <Find currentGame={currentGame} />}
+      {currentGame && gameIsActive && !currentLeaderboard && (
+        <Find currentGame={currentGame} />
+      )}
     </StyledStickyContainer>
   );
 }

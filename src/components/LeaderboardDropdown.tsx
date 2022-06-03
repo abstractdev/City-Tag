@@ -1,11 +1,12 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import { useState, useRef, useEffect } from "react";
 import { clickOutside } from "../helpers/clickOutside";
 import { allGames } from "../data/allGames";
+import { propsInterface } from "../interfaces/propsInterface";
 
-export function LeaderboardDropdown() {
+export function LeaderboardDropdown(props: propsInterface) {
+  const { setCurrentLeaderboard } = props;
   const containerRef = useRef<any>();
   const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
   const navigate = () => {
@@ -19,11 +20,25 @@ export function LeaderboardDropdown() {
     setDropdownIsOpen((prev) => !prev);
   }
 
+  function handleCurrentLeaderboard(
+    event: React.MouseEvent<HTMLAnchorElement>
+  ) {
+    setDropdownIsOpen(false);
+    console.log("click");
+    allGames.forEach((e) => {
+      if (event !== null && event.target instanceof HTMLElement) {
+        if (`${e.name}lb` === event.target.dataset.id) {
+          console.log("lb match");
+          setCurrentLeaderboard!(`${e.name}lb`);
+        }
+      }
+    });
+  }
+
   return (
     <>
       <StyledLeaderboardLinkContainer ref={containerRef}>
         <StyledLeaderboardLink
-          href="#"
           onClick={(event) => handleSetDropdownIsOpen(event)}
         >
           Leaderboard
@@ -39,12 +54,11 @@ export function LeaderboardDropdown() {
               {allGames.map((e) => {
                 return (
                   <StyledLink
-                    data-id={e.name}
-                    to={`/leaderboard/${e.name}`}
+                    data-id={e.name + "lb"}
                     key={e.name + "lb"}
-                    onClick={() => setDropdownIsOpen(false)}
+                    onClick={(event) => handleCurrentLeaderboard(event)}
                   >
-                    <StyledLi data-id={e.name}>{e.displayName}</StyledLi>
+                    <StyledLi data-id={e.name + "lb"}>{e.displayName}</StyledLi>
                   </StyledLink>
                 );
               })}
@@ -66,6 +80,7 @@ const StyledLeaderboardLink = styled.a`
   font-size: 2rem;
   text-decoration: none;
   font-family: "sky";
+  cursor: pointer;
   color: ${({ theme }) => theme.colors.white};
 
   @media screen and (max-width: 670px) {
@@ -97,7 +112,8 @@ const StyledLi = styled.li`
     background-color: rgba(0, 0, 0, 0.5);
   }
 `;
-const StyledLink = styled(Link)`
+const StyledLink = styled.a`
   text-decoration: none;
+  cursor: pointer;
   color: ${({ theme }) => theme.colors.main};
 `;

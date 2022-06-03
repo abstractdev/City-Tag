@@ -94,4 +94,6 @@ export interface propsInterface {
   setUserId?: (userId: string) => void;
   timeErrorSpanIsVisible?: boolean;
   setTimeErrorSpanIsVisible?: (timeErrorSpanIsVisible: boolean) => void;
+  currentLeaderboard?: string;
+  setCurrentLeaderboard?: (currentLeaderboard: string) => void;
 }

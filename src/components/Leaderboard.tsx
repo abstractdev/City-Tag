@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { propsInterface } from "../interfaces/propsInterface";
 import { stylesInterface } from "../interfaces/stylesInterface";
-import { useParams } from "react-router-dom";
 import { getFilteredCityProperties } from "../helpers/getGameData";
 import {
   StyledTable,
@@ -12,9 +11,10 @@ import {
 import { makeUserList } from "../helpers/makeUserList";
 
 export function Leaderboard(props: propsInterface) {
-  const { cityParam } = useParams();
-  const { userData } = props;
-  const filteredCityUsers = userData!.filter((e: any) => e.city === cityParam);
+  const { userData, currentLeaderboard } = props;
+  const filteredCityUsers = userData!.filter(
+    (e: any) => `${e.city}lb` === currentLeaderboard
+  );
   const { filteredCityName, filteredCityColor, filteredCityFont } =
     getFilteredCityProperties(filteredCityUsers[0].city);
   return (

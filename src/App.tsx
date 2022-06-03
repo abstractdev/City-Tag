@@ -6,22 +6,16 @@ import { theme } from "./shared-styles/theme";
 import { Footer } from "./components/Footer";
 import { allGames } from "./data/allGames";
 import { Home } from "./components/Home";
-import { Route, Routes } from "react-router-dom";
 import { useGetUserData } from "./custom-hooks/useGetUserData";
 import { Leaderboard } from "./components/Leaderboard";
 import { Game } from "./components/Game";
-import { useResetGameState } from "./custom-hooks/useResetGameState";
-import { useGameRedirect } from "./custom-hooks/useGameRedirect";
-
 function App() {
   const { userData } = useGetUserData();
   const [gameIsActive, setGameIsActive] = useState(false);
   const [currentGame, setCurrentGame] = useState<any>(null);
   const [time, setTime] = useState(0);
   const [userId, setUserId] = useState("");
-
-  useGameRedirect(currentGame, setCurrentGame, setGameIsActive);
-  useResetGameState(setCurrentGame, setGameIsActive, userId);
+  const [currentLeaderboard, setCurrentLeaderboard] = useState("");
 
   function handleCurrentGame(event: React.MouseEvent<HTMLDivElement>) {
     allGames.forEach((e) => {
@@ -44,43 +38,32 @@ function App() {
         setTime={setTime}
         userId={userId}
         setUserId={setUserId}
+        currentLeaderboard={currentLeaderboard}
+        setCurrentLeaderboard={setCurrentLeaderboard}
       />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Home
-              currentGame={currentGame}
-              handleCurrentGame={handleCurrentGame}
-            />
-          }
+      {!currentGame && !currentLeaderboard && (
+        <Home currentGame={currentGame} handleCurrentGame={handleCurrentGame} />
+      )}
+      {currentGame && !currentLeaderboard && (
+        <Game
+          currentGame={currentGame}
+          setCurrentGame={setCurrentGame}
+          gameIsActive={gameIsActive}
+          setGameIsActive={setGameIsActive}
+          handleCurrentGame={handleCurrentGame}
+          userData={userData}
+          time={time}
+          setTime={setTime}
+          userId={userId}
+          setUserId={setUserId}
         />
-        {currentGame && (
-          <Route
-            path="/game/:cityParam"
-            element={
-              <Game
-                currentGame={currentGame}
-                setCurrentGame={setCurrentGame}
-                gameIsActive={gameIsActive}
-                setGameIsActive={setGameIsActive}
-                handleCurrentGame={handleCurrentGame}
-                userData={userData}
-                time={time}
-                setTime={setTime}
-                userId={userId}
-                setUserId={setUserId}
-              />
-            }
-          />
-        )}
-        {userData && (
-          <Route
-            path="/leaderboard/:cityParam"
-            element={<Leaderboard userData={userData} />}
-          />
-        )}
-      </Routes>
+      )}
+      {currentLeaderboard && (
+        <Leaderboard
+          userData={userData}
+          currentLeaderboard={currentLeaderboard}
+        />
+      )}
       <Footer />
     </ThemeProvider>
   );

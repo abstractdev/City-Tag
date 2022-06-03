@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { propsInterface } from "../interfaces/propsInterface";
 import { VFlex } from "../shared-styles/VFlex.styles";
-import { Link } from "react-router-dom";
 import { getAllGameImages } from "../helpers/getGameData";
 
 export function Home(props: propsInterface) {
@@ -13,12 +12,12 @@ export function Home(props: propsInterface) {
       <StyledHomeContent>
         {allGameImages.map((e, i) => {
           return (
-            <Link to={`/game/${e.name}`} key={e.name + "board"}>
+            <StyledLink key={e.name + "board"}>
               <StyledHomeImageContainer
                 data-id={e.name}
                 style={{ backgroundImage: `url(${e.gameImage})` }}
               />
-            </Link>
+            </StyledLink>
           );
         })}
       </StyledHomeContent>
@@ -58,4 +57,10 @@ const StyledHomeImageContainer = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 300px;
+`;
+
+const StyledLink = styled.button`
+  border: none;
+  padding: 0;
+  cursor: pointer;
 `;
