@@ -29,7 +29,7 @@ export function handleFormSubmit(
       const userRef = doc(db, "users", userId);
       await setDoc(
         userRef,
-        { name: !name ? "Anonymous" : name },
+        { name: !name.trim() ? "Anonymous" : name },
         { merge: true }
       );
       //gather all current game user data and add to array
@@ -38,7 +38,9 @@ export function handleFormSubmit(
       const q = query(usersRef, where("city", "==", `${currentGame.name}`));
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-        currentGameUsers.push(doc.data());
+        if (doc.data().name) {
+          currentGameUsers.push(doc.data());
+        }
       });
       //extract backend times from each user
       const times = currentGameUsers.map((e) => e.backendTime);
