@@ -9,6 +9,10 @@ import { Home } from "./components/Home";
 import { useGetUserData } from "./custom-hooks/useGetUserData";
 import { Leaderboard } from "./components/Leaderboard";
 import { Game } from "./components/Game";
+<<<<<<< HEAD
+=======
+import { useResetGameState } from "./custom-hooks/useResetGameState";
+>>>>>>> c54c5558a378d273cf2999da9a3ae56434f7230a
 function App() {
   const { userData } = useGetUserData();
   const [gameIsActive, setGameIsActive] = useState(false);
