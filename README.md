@@ -1,6 +1,5 @@
-# City Tag
-[![City Tag](./citytag1.png)](https://abstractdev.github.io/city-tag/)
-============
+# [City Tag](https://abstractdev.github.io/city-tag/)
+https://user-images.githubusercontent.com/97710625/183230530-43fd4f82-19cf-4779-b4c1-f4b480d14df5.mp4
 
 [Live Demo](https://abstractdev.github.io/city-tag/)</br>
 A "Seek-And-Find" game similar to Where's Waldo made with Typescript.
