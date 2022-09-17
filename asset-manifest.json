@@ -1,0 +1,41 @@
+{
+  "files": {
+    "main.js": "/city-tag/static/js/main.31b76047.js",
+    "static/media/tokyo.jpg": "/city-tag/static/media/tokyo.c687bf654de4d1ffbbf7.jpg",
+    "static/media/paris.jpg": "/city-tag/static/media/paris.2a52758b71e26bacf946.jpg",
+    "static/media/ny.jpg": "/city-tag/static/media/ny.959c9817dde20ef248ba.jpg",
+    "static/media/rio.jpg": "/city-tag/static/media/rio.70f5854c849cacd89679.jpg",
+    "static/media/Kamikaze3DGradient.ttf": "/city-tag/static/media/Kamikaze3DGradient.233857091abde27c58ad.ttf",
+    "static/media/end.wav": "/city-tag/static/media/end.abeb47073e87976cdb18.wav",
+    "static/media/right.wav": "/city-tag/static/media/right.fe95e484c435a6154d9c.wav",
+    "static/media/wrong.wav": "/city-tag/static/media/wrong.9c152e446afe276d342b.wav",
+    "static/media/CityStencil.ttf": "/city-tag/static/media/CityStencil.369c94d99881fa823908.ttf",
+    "static/media/Skyfont-NonCommercial.otf": "/city-tag/static/media/Skyfont-NonCommercial.d2151277ce0814443935.otf",
+    "static/media/parisFont.otf": "/city-tag/static/media/parisFont.0912d889cfaed64954a4.otf",
+    "static/media/soccer.jpg": "/city-tag/static/media/soccer.100869afb99dcfd9fd77.jpg",
+    "static/media/brie.jpg": "/city-tag/static/media/brie.bf1b8d71a24794336217.jpg",
+    "static/media/dancer.jpg": "/city-tag/static/media/dancer.7263864b61db22b51623.jpg",
+    "static/media/tophat.jpg": "/city-tag/static/media/tophat.a17cdcd0e5e6b5933b14.jpg",
+    "static/media/tambourine.jpg": "/city-tag/static/media/tambourine.00a50eb8e0b3f7469089.jpg",
+    "static/media/flag.jpg": "/city-tag/static/media/flag.0716d4b77828dd69da3b.jpg",
+    "static/media/fleurdelis.jpg": "/city-tag/static/media/fleurdelis.a364ac40f7f2269fd68f.jpg",
+    "static/media/iloveny.jpg": "/city-tag/static/media/iloveny.90928933bca17ab9805e.jpg",
+    "static/media/monalisa.jpg": "/city-tag/static/media/monalisa.72cca4effe1a7439044f.jpg",
+    "static/media/broadway.jpg": "/city-tag/static/media/broadway.36fb27ccce1123986186.jpg",
+    "static/media/hotdog.jpg": "/city-tag/static/media/hotdog.c0321976a49a7ad5e1f6.jpg",
+    "static/media/BuenosAiresNF.otf": "/city-tag/static/media/BuenosAiresNF.e2aae6fef4ebb6411a50.otf",
+    "static/media/sushi.jpg": "/city-tag/static/media/sushi.a22fa6826334a117c8f7.jpg",
+    "static/media/parasol.jpg": "/city-tag/static/media/parasol.9eb1eaf1a8d9c2b971ab.jpg",
+    "static/media/sumo.jpg": "/city-tag/static/media/sumo.71890cb10cecdd02c285.jpg",
+    "static/media/geisha.jpg": "/city-tag/static/media/geisha.934d76ef313e823f4602.jpg",
+    "static/media/police.jpg": "/city-tag/static/media/police.3d0f3264e38ade15c30e.jpg",
+    "static/media/metropolis.black.otf": "/city-tag/static/media/metropolis.black.1510951eb17eaadbe995.otf",
+    "static/media/metropolis.regular.otf": "/city-tag/static/media/metropolis.regular.67a1988d7b65b0aaa16d.otf",
+    "static/media/Newyorkcity.ttf": "/city-tag/static/media/Newyorkcity.1d078aa99f34c48a15af.ttf",
+    "index.html": "/city-tag/index.html",
+    "main.31b76047.js.map": "/city-tag/static/js/main.31b76047.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.31b76047.js"
+  ]
+}
