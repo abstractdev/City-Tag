@@ -24,11 +24,9 @@ export function LeaderboardDropdown(props: propsInterface) {
     event: React.MouseEvent<HTMLAnchorElement>
   ) {
     setDropdownIsOpen(false);
-    console.log("click");
     allGames.forEach((e) => {
       if (event !== null && event.target instanceof HTMLElement) {
         if (`${e.name}lb` === event.target.dataset.id) {
-          console.log("lb match");
           setCurrentLeaderboard!(`${e.name}lb`);
         }
       }
